@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tj.Livraria.Infra", "Tj.Liv
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8B1CE131-0322-4048-B3C8-5230C44E905E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tj.Livraria.Tests", "Tj.Livraria.Tests\Tj.Livraria.Tests.csproj", "{1F96D392-540D-4919-BC85-D956CEF4C089}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{49047F0F-4D00-4E22-BE04-57CD2AFC59C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49047F0F-4D00-4E22-BE04-57CD2AFC59C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49047F0F-4D00-4E22-BE04-57CD2AFC59C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F96D392-540D-4919-BC85-D956CEF4C089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F96D392-540D-4919-BC85-D956CEF4C089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F96D392-540D-4919-BC85-D956CEF4C089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F96D392-540D-4919-BC85-D956CEF4C089}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8F0FBE06-9C72-49F3-905B-0AEAE5ABE544} = {7E25BF84-52C2-42D6-88AD-585A78DBC787}
 		{49047F0F-4D00-4E22-BE04-57CD2AFC59C5} = {5054B890-CAF8-41F4-81F8-30F07D8B1274}
+		{1F96D392-540D-4919-BC85-D956CEF4C089} = {8B1CE131-0322-4048-B3C8-5230C44E905E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56FD4AF0-1113-40A0-BF2D-94E3D2FD7AF5}
