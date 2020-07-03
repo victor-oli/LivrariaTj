@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Domain", "0 - Domain", "{7E25BF84-52C2-42D6-88AD-585A78DBC787}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tj.Livraria.Domain", "Tj.Livraria.Domain\Tj.Livraria.Domain.csproj", "{8F0FBE06-9C72-49F3-905B-0AEAE5ABE544}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{598BDA18-905E-4B98-9E70-8EC17D0F1F4A}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore.git = .gitignore.git
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F0FBE06-9C72-49F3-905B-0AEAE5ABE544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F0FBE06-9C72-49F3-905B-0AEAE5ABE544}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F0FBE06-9C72-49F3-905B-0AEAE5ABE544}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F0FBE06-9C72-49F3-905B-0AEAE5ABE544}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8F0FBE06-9C72-49F3-905B-0AEAE5ABE544} = {7E25BF84-52C2-42D6-88AD-585A78DBC787}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56FD4AF0-1113-40A0-BF2D-94E3D2FD7AF5}
+	EndGlobalSection
+EndGlobal
