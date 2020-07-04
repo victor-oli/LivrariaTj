@@ -1,7 +1,7 @@
 ﻿using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using Tj.Livraria.Domain.Entities;
 using Tj.Livraria.Domain.Interfaces.Repository;
 
@@ -26,22 +26,53 @@ namespace Tj.Livraria.Infra.Repositories
 
         public bool Delete(int cod)
         {
-            throw new NotImplementedException();
+            string query = "Delete from Assunto where CodAs = @cod";
+
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                return conn.Execute(query, new
+                {
+                    cod
+                }) == 1;
+            }
         }
 
         public Assunto Get(int cod)
         {
-            throw new NotImplementedException();
+            string query = "Select CodAs, Descricao from Assunto where CodAs = @cod";
+
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                return conn.QueryFirstOrDefault<Assunto>(query, new
+                {
+                    cod
+                });
+            }
         }
 
         public List<Assunto> GetAll()
         {
-            throw new NotImplementedException();
+            string query = "Select CodAs, Descricao from Assunto";
+
+            using(var conn = new SqlConnection(ConnectionString))
+            {
+                return conn.Query<Assunto>(query)
+                    .ToList();
+            }
         }
 
         public bool Update(Assunto entity)
         {
-            throw new NotImplementedException();
+            string query = "Update Assunto (Descricao) set (@Descricao) where CodAs = @cod";
+
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                return conn.Execute(query, new
+                {
+                    cod = entity.CodAssunto,
+                    entity.Descricao
+                }) == 1;
+            }
         }
     }
 }
