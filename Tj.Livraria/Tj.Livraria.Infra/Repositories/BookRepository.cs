@@ -1,10 +1,10 @@
 ﻿using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using Tj.Livraria.Domain.Entities;
 using Tj.Livraria.Domain.Interfaces.Repository;
+using Tj.Livraria.Infra.Mapping;
 
 namespace Tj.Livraria.Infra.Repositories
 {
@@ -51,10 +51,12 @@ namespace Tj.Livraria.Infra.Repositories
 
             using (var conn = new SqlConnection(ConnectionString))
             {
-                return conn.QueryFirstOrDefault<Book>(query, new
+                var book = conn.QueryFirstOrDefault<dynamic>(query, new
                 {
                     cod
                 });
+
+                return BookMapping.Map(book);
             }
         }
 
@@ -64,8 +66,15 @@ namespace Tj.Livraria.Infra.Repositories
 
             using (var conn = new SqlConnection(ConnectionString))
             {
-                return conn.Query<Book>(query)
+                var result = conn.Query<dynamic>(query)
                     .ToList();
+
+                List<Book> bookList = new List<Book>();
+
+                result.ForEach(x => 
+                    bookList.Add(BookMapping.Map(x)));
+
+                return bookList;
             }
         }
 
