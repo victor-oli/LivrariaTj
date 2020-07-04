@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Tj.Livraria.Domain.Entities;
 using Tj.Livraria.Domain.Interfaces.Repository;
+using Tj.Livraria.Infra.Mapping;
 
 namespace Tj.Livraria.Infra.Repositories
 {
@@ -44,10 +45,12 @@ namespace Tj.Livraria.Infra.Repositories
 
             using (var conn = new SqlConnection(ConnectionString))
             {
-                return conn.QueryFirstOrDefault<Author>(query, new
+                var author = conn.QueryFirstOrDefault<dynamic>(query, new
                 {
                     cod
                 });
+
+                return AuthorMapping.Map(author);
             }
         }
 
@@ -57,8 +60,15 @@ namespace Tj.Livraria.Infra.Repositories
 
             using (var conn = new SqlConnection(ConnectionString))
             {
-                return conn.Query<Author>(query)
+                var result = conn.Query<dynamic>(query)
                     .ToList();
+
+                List<Author> authorList = new List<Author>();
+
+                result.ForEach(x => 
+                    authorList.Add(AuthorMapping.Map(x)));
+
+                return authorList;
             }
         }
 
