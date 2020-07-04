@@ -151,5 +151,37 @@ namespace Tj.Livraria.Tests.Domain.Services
             Assert.NotNull(ex);
             Assert.False(string.IsNullOrWhiteSpace(ex.Message));
         }
+
+        [Trait("AssuntoService", "When deleting"), Fact(DisplayName = "With Valid Arguments")]
+        public void DeleteWithValidArguments()
+        {
+            // Arrange
+            var codSubject = 1;
+            Mock<IAssuntoRepository> mock = new Mock<IAssuntoRepository>();
+            mock.Setup(x => x.Delete(codSubject)).Returns(true);
+
+            IAssuntoService service = new AssuntoService(mock.Object);
+
+            // Act
+            bool hasDeleted = service.Delete(codSubject);
+
+            // Assert
+            Assert.True(hasDeleted);
+        }
+
+        [Trait("AssuntoService", "When deleting"), Fact(DisplayName = "With Invalid Arguments")]
+        public void DeleteWithInvalidArguments()
+        {
+            // Arrange
+            var codSubject = 0;
+            Mock<IAssuntoRepository> mock = new Mock<IAssuntoRepository>();
+            IAssuntoService service = new AssuntoService(mock.Object);
+
+            // Act & Assert
+            var ex = Assert.Throws<NullOrEmptyException>(() => service.Delete(codSubject));
+
+            Assert.NotNull(ex);
+            Assert.False(string.IsNullOrWhiteSpace(ex.Message));
+        }
     }
 }

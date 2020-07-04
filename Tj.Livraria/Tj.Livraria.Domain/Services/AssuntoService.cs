@@ -26,7 +26,10 @@ namespace Tj.Livraria.Domain.Services
 
         public bool Delete(int cod)
         {
-            throw new NotImplementedException();
+            if (cod < 1)
+                throw new NullOrEmptyException("You need send a valid subject cod");
+
+            return _repository.Delete(cod);
         }
 
         public Assunto Get(int cod)
