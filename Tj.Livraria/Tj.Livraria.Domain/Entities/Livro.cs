@@ -11,7 +11,7 @@ namespace Tj.Livraria.Domain.Entities
         public string AnoPublicacao { get; set; }
         public decimal Valor { get; set; }
 
-        public List<Autor> LivroAutor { get; set; } = new List<Autor>();
+        public List<Author> LivroAutor { get; set; } = new List<Author>();
         public List<Subject> LivroAssunto { get; set; } = new List<Subject>();
     }
 }
