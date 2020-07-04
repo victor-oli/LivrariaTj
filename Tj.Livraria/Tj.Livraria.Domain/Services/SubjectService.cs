@@ -18,8 +18,7 @@ namespace Tj.Livraria.Domain.Services
 
         public bool Add(Subject entity)
         {
-            if (string.IsNullOrWhiteSpace(entity.Description))
-                throw new NullOrEmptyException("Description can't be null or empty");
+            entity.IsValidToCreateOrUpdate();
 
             return _repository.Add(entity);
         }
@@ -47,20 +46,14 @@ namespace Tj.Livraria.Domain.Services
 
         public bool Update(Subject entity)
         {
-            if (entity.SubjectCod < 1)
-                throw new NullOrEmptyException("Cod can't be null or empty");
-
-            if (string.IsNullOrWhiteSpace(entity.Description))
-                throw new NullOrEmptyException("Description can't be null or empty");
+            entity.IsValidToCreateOrUpdate();
 
             var originalSubject = _repository.Get(entity.SubjectCod);
 
             if (originalSubject == null)
                 throw new EntityNotFoundException($"Subject not found, cod: {entity.SubjectCod}");
 
-            originalSubject.Description = entity.Description;
-
-            return _repository.Update(originalSubject);
+            return _repository.Update(entity);
         }
     }
 }
