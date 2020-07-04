@@ -12,6 +12,6 @@ namespace Tj.Livraria.Domain.Entities
         public decimal Valor { get; set; }
 
         public List<Autor> LivroAutor { get; set; } = new List<Autor>();
-        public List<Assunto> LivroAssunto { get; set; } = new List<Assunto>();
+        public List<Subject> LivroAssunto { get; set; } = new List<Subject>();
     }
 }

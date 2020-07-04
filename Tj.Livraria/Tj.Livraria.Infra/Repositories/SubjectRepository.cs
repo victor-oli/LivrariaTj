@@ -7,11 +7,11 @@ using Tj.Livraria.Domain.Interfaces.Repository;
 
 namespace Tj.Livraria.Infra.Repositories
 {
-    public class AssuntoRepository : IAssuntoRepository
+    public class SubjectRepository : ISubjectRepository
     {
         private string ConnectionString = "Data Source=localhost;Initial Catalog=Livraria;Trusted_Connection=True;";
 
-        public bool Add(Assunto entity)
+        public bool Add(Subject entity)
         {
             string query = "Insert into Assunto (Descricao) values (@Descricao)";
 
@@ -19,7 +19,7 @@ namespace Tj.Livraria.Infra.Repositories
             {
                 return conn.Execute(query, new
                 {
-                    entity.Descricao
+                    entity.Description
                 }) == 1;
             }
         }
@@ -37,31 +37,31 @@ namespace Tj.Livraria.Infra.Repositories
             }
         }
 
-        public Assunto Get(int cod)
+        public Subject Get(int cod)
         {
             string query = "Select CodAs, Descricao from Assunto where CodAs = @cod";
 
             using (var conn = new SqlConnection(ConnectionString))
             {
-                return conn.QueryFirstOrDefault<Assunto>(query, new
+                return conn.QueryFirstOrDefault<Subject>(query, new
                 {
                     cod
                 });
             }
         }
 
-        public List<Assunto> GetAll()
+        public List<Subject> GetAll()
         {
             string query = "Select CodAs, Descricao from Assunto";
 
             using(var conn = new SqlConnection(ConnectionString))
             {
-                return conn.Query<Assunto>(query)
+                return conn.Query<Subject>(query)
                     .ToList();
             }
         }
 
-        public bool Update(Assunto entity)
+        public bool Update(Subject entity)
         {
             string query = "Update Assunto (Descricao) set (@Descricao) where CodAs = @cod";
 
@@ -69,8 +69,8 @@ namespace Tj.Livraria.Infra.Repositories
             {
                 return conn.Execute(query, new
                 {
-                    cod = entity.CodAssunto,
-                    entity.Descricao
+                    cod = entity.SubjectCod,
+                    entity.Description
                 }) == 1;
             }
         }

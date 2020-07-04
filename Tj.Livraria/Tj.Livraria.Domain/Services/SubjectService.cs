@@ -7,18 +7,18 @@ using Tj.Livraria.Domain.Interfaces.Service;
 
 namespace Tj.Livraria.Domain.Services
 {
-    public class AssuntoService : IAssuntoService
+    public class SubjectService : ISubjectService
     {
-        private IAssuntoRepository _repository;
+        private ISubjectRepository _repository;
 
-        public AssuntoService(IAssuntoRepository repository)
+        public SubjectService(ISubjectRepository repository)
         {
             _repository = repository;
         }
 
-        public bool Add(Assunto entity)
+        public bool Add(Subject entity)
         {
-            if (string.IsNullOrWhiteSpace(entity.Descricao))
+            if (string.IsNullOrWhiteSpace(entity.Description))
                 throw new NullOrEmptyException("Description can't be null or empty");
 
             return _repository.Add(entity);
@@ -32,7 +32,7 @@ namespace Tj.Livraria.Domain.Services
             return _repository.Delete(cod);
         }
 
-        public Assunto Get(int cod)
+        public Subject Get(int cod)
         {
             if (cod < 1)
                 throw new NullOrEmptyException("You need send a valid subject cod");
@@ -40,22 +40,22 @@ namespace Tj.Livraria.Domain.Services
             return _repository.Get(cod);
         }
 
-        public List<Assunto> GetAll()
+        public List<Subject> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public bool Update(Assunto entity)
+        public bool Update(Subject entity)
         {
-            if (entity.CodAssunto < 1)
+            if (entity.SubjectCod < 1)
                 throw new NullOrEmptyException("Cod can't be null or empty");
 
-            if (string.IsNullOrWhiteSpace(entity.Descricao))
+            if (string.IsNullOrWhiteSpace(entity.Description))
                 throw new NullOrEmptyException("Cod can't be null or empty");
 
-            var originalSubject = _repository.Get(entity.CodAssunto);
+            var originalSubject = _repository.Get(entity.SubjectCod);
 
-            originalSubject.Descricao = entity.Descricao;
+            originalSubject.Description = entity.Description;
 
             return _repository.Update(originalSubject);
         }
