@@ -18,7 +18,7 @@ namespace Tj.Livraria.Domain.Services
 
         public bool Add(Author entity)
         {
-            entity.IsValid();
+            entity.IsValidToCreateOrUpdate();
 
             return _repository.Add(entity);
         }
@@ -46,7 +46,7 @@ namespace Tj.Livraria.Domain.Services
 
         public bool Update(Author entity)
         {
-            entity.IsValid();
+            entity.IsValidToCreateOrUpdate();
 
             var originalAuthor = _repository.Get(entity.AuthorCod);
 

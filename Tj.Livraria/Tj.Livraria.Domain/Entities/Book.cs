@@ -15,7 +15,7 @@ namespace Tj.Livraria.Domain.Entities
         public List<Author> BookAuthors { get; set; } = new List<Author>();
         public List<Subject> BookSubjects { get; set; } = new List<Subject>();
 
-        public void IsValidToCreate()
+        public void IsValidToCreateOrUpdate()
         {
             if (string.IsNullOrWhiteSpace(Title))
                 throw new NullOrEmptyException("Title can't be null or empty");
