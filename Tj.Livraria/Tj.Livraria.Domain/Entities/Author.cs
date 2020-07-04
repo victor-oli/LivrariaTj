@@ -8,6 +8,6 @@ namespace Tj.Livraria.Domain.Entities
         public int AuthorCod { get; set; }
         public string Name { get; set; }
 
-        public List<Livro> AuthorBooks { get; set; } = new List<Livro>();
+        public List<Book> AuthorBooks { get; set; } = new List<Book>();
     }
 }

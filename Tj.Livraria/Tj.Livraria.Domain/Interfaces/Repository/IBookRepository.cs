@@ -2,7 +2,7 @@
 
 namespace Tj.Livraria.Domain.Interfaces.Repository
 {
-    public interface ILivroRepository : IRepository<Livro>
+    public interface IBookRepository : IRepository<Book>
     {
 
     }

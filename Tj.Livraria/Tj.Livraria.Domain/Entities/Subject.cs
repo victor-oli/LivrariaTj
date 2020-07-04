@@ -7,6 +7,6 @@ namespace Tj.Livraria.Domain.Entities
         public int SubjectCod { get; set; }
         public string Description { get; set; }
 
-        public List<Livro> SubjectBooks { get; set; } = new List<Livro>();
+        public List<Book> SubjectBooks { get; set; } = new List<Book>();
     }
 }

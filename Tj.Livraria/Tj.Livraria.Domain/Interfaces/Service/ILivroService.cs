@@ -2,7 +2,7 @@
 
 namespace Tj.Livraria.Domain.Interfaces.Service
 {
-    public interface ILivroService : IService<Livro>
+    public interface ILivroService : IService<Book>
     {
 
     }
