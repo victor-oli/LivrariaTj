@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Domain", "0 - Domain", "{7E25BF84-52C2-42D6-88AD-585A78DBC787}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tj.Livraria.Domain", "Tj.Livraria.Domain\Tj.Livraria.Domain.csproj", "{8F0FBE06-9C72-49F3-905B-0AEAE5ABE544}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tj.Livraria.Domain", "Tj.Livraria.Domain\Tj.Livraria.Domain.csproj", "{8F0FBE06-9C72-49F3-905B-0AEAE5ABE544}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{598BDA18-905E-4B98-9E70-8EC17D0F1F4A}"
 	ProjectSection(SolutionItems) = preProject
@@ -14,11 +14,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Infra", "1 - Infra", "{5054B890-CAF8-41F4-81F8-30F07D8B1274}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tj.Livraria.Infra", "Tj.Livraria.Infra\Tj.Livraria.Infra.csproj", "{49047F0F-4D00-4E22-BE04-57CD2AFC59C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tj.Livraria.Infra", "Tj.Livraria.Infra\Tj.Livraria.Infra.csproj", "{49047F0F-4D00-4E22-BE04-57CD2AFC59C5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8B1CE131-0322-4048-B3C8-5230C44E905E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tj.Livraria.Tests", "Tj.Livraria.Tests\Tj.Livraria.Tests.csproj", "{1F96D392-540D-4919-BC85-D956CEF4C089}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - App", "2 - App", "{DD8E44BB-E20B-494A-93FE-DAFA75A5A7D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Presentation", "3 - Presentation", "{FA7BA33D-416B-4099-BB46-5D1360CEFA8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tj.Livraria.App", "Tj.Livraria.App\Tj.Livraria.App.csproj", "{46B266DE-092D-467F-BE13-1AD1BE18A6AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tj.Livraria.Presentation", "Tj.Livraria.Presentation\Tj.Livraria.Presentation.csproj", "{59402A5F-305B-4FD3-A355-67CD57CFAF89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +46,14 @@ Global
 		{1F96D392-540D-4919-BC85-D956CEF4C089}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F96D392-540D-4919-BC85-D956CEF4C089}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F96D392-540D-4919-BC85-D956CEF4C089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46B266DE-092D-467F-BE13-1AD1BE18A6AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46B266DE-092D-467F-BE13-1AD1BE18A6AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46B266DE-092D-467F-BE13-1AD1BE18A6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46B266DE-092D-467F-BE13-1AD1BE18A6AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59402A5F-305B-4FD3-A355-67CD57CFAF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59402A5F-305B-4FD3-A355-67CD57CFAF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59402A5F-305B-4FD3-A355-67CD57CFAF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59402A5F-305B-4FD3-A355-67CD57CFAF89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +62,8 @@ Global
 		{8F0FBE06-9C72-49F3-905B-0AEAE5ABE544} = {7E25BF84-52C2-42D6-88AD-585A78DBC787}
 		{49047F0F-4D00-4E22-BE04-57CD2AFC59C5} = {5054B890-CAF8-41F4-81F8-30F07D8B1274}
 		{1F96D392-540D-4919-BC85-D956CEF4C089} = {8B1CE131-0322-4048-B3C8-5230C44E905E}
+		{46B266DE-092D-467F-BE13-1AD1BE18A6AE} = {DD8E44BB-E20B-494A-93FE-DAFA75A5A7D0}
+		{59402A5F-305B-4FD3-A355-67CD57CFAF89} = {FA7BA33D-416B-4099-BB46-5D1360CEFA8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56FD4AF0-1113-40A0-BF2D-94E3D2FD7AF5}
