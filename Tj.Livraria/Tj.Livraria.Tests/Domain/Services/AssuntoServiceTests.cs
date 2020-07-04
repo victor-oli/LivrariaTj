@@ -1,4 +1,5 @@
 ﻿using Moq;
+using System.Collections.Generic;
 using Tj.Livraria.Domain.Entities;
 using Tj.Livraria.Domain.Exceptions;
 using Tj.Livraria.Domain.Interfaces.Repository;
@@ -46,6 +47,27 @@ namespace Tj.Livraria.Tests.Domain.Services
 
             Assert.NotNull(ex);
             Assert.Equal("Description can't be null or empty", ex.Message);
+        }
+
+        [Trait("AssuntoService", "When getting all"), Fact(DisplayName = "On Success Case")]
+        public void OnSuccessCase()
+        {
+            // Arrange
+            var validResult = new List<Assunto>
+            {
+                new Assunto{ Descricao = "Terror" }
+            };
+            Mock<IAssuntoRepository> mock = new Mock<IAssuntoRepository>();
+            mock.Setup(x => x.GetAll()).Returns(validResult);
+
+            IAssuntoService service = new AssuntoService(mock.Object);
+
+            // Act
+            var assuntoList = service.GetAll();
+
+            // Assert
+            Assert.True(assuntoList.Count == 1);
+            Assert.Equal(validResult[0].Descricao, assuntoList[0].Descricao);
         }
     }
 }

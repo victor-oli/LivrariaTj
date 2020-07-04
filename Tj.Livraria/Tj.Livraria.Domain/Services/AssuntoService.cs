@@ -36,7 +36,7 @@ namespace Tj.Livraria.Domain.Services
 
         public List<Assunto> GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
         public bool Update(Assunto entity)
