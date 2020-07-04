@@ -31,6 +31,9 @@ namespace Tj.Livraria.Domain.Services
 
         public Assunto Get(int cod)
         {
+            if (cod < 1)
+                throw new NullOrEmptyException("You need send a valid subject cod");
+
             return _repository.Get(cod);
         }
 

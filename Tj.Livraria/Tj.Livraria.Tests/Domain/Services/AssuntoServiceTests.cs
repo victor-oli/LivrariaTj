@@ -92,5 +92,20 @@ namespace Tj.Livraria.Tests.Domain.Services
             Assert.Equal(validResult.CodAssunto, result.CodAssunto);
             Assert.Equal(validResult.Descricao, result.Descricao);
         }
+
+        [Trait("AssuntoService", "When getting one"), Fact(DisplayName = "When Invalid Arguments")]
+        public void WhenInvalidArguments()
+        {
+            // Arrange
+            var codAssunto = 0;
+            Mock<IAssuntoRepository> mock = new Mock<IAssuntoRepository>();
+            IAssuntoService service = new AssuntoService(mock.Object);
+
+            // Act & Assert
+            var ex = Assert.Throws<NullOrEmptyException>(() => service.Get(codAssunto));
+
+            Assert.NotNull(ex);
+            Assert.Equal("You need send a valid subject cod", ex.Message);
+        }
     }
 }
