@@ -51,9 +51,12 @@ namespace Tj.Livraria.Domain.Services
                 throw new NullOrEmptyException("Cod can't be null or empty");
 
             if (string.IsNullOrWhiteSpace(entity.Description))
-                throw new NullOrEmptyException("Cod can't be null or empty");
+                throw new NullOrEmptyException("Description can't be null or empty");
 
             var originalSubject = _repository.Get(entity.SubjectCod);
+
+            if (originalSubject == null)
+                throw new EntityNotFoundException($"Subject not found, cod: {entity.SubjectCod}");
 
             originalSubject.Description = entity.Description;
 
