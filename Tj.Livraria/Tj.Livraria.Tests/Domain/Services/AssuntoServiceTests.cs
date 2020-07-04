@@ -12,7 +12,7 @@ namespace Tj.Livraria.Tests.Domain.Services
     public class AssuntoServiceTests
     {
         [Trait("AssuntoService", "When adding"), Fact(DisplayName = "With Valid Arguments")]
-        public void WithValidArguments()
+        public void AddWithValidArguments()
         {
             // Arrange
             Assunto assunto = new Assunto
@@ -20,9 +20,9 @@ namespace Tj.Livraria.Tests.Domain.Services
                 Descricao = "Terror"
             };
 
-            Mock<IAssuntoRepository> mock = new Mock<IAssuntoRepository>();            
+            Mock<IAssuntoRepository> mock = new Mock<IAssuntoRepository>();
             mock.Setup(x => x.Add(assunto)).Returns(true);
-            
+
             IAssuntoService service = new AssuntoService(mock.Object);
 
             // Act
@@ -33,7 +33,7 @@ namespace Tj.Livraria.Tests.Domain.Services
         }
 
         [Trait("AssuntoService", "When adding"), Fact(DisplayName = "With Invalid Arguments")]
-        public void WithInvalidArguments()
+        public void AddWithInvalidArguments()
         {
             // Arrange
             Assunto assunto = new Assunto();
@@ -50,7 +50,7 @@ namespace Tj.Livraria.Tests.Domain.Services
         }
 
         [Trait("AssuntoService", "When getting all"), Fact(DisplayName = "On Success Case")]
-        public void OnSuccessCase()
+        public void GetAllOnSuccessCase()
         {
             // Arrange
             var validResult = new List<Assunto>
@@ -70,8 +70,8 @@ namespace Tj.Livraria.Tests.Domain.Services
             Assert.Equal(validResult[0].Descricao, assuntoList[0].Descricao);
         }
 
-        [Trait("AssuntoService", "When getting one"), Fact(DisplayName = "When Valid Arguments")]
-        public void WhenValidArguments()
+        [Trait("AssuntoService", "When getting one"), Fact(DisplayName = "With Valid Arguments")]
+        public void GetWithValidArguments()
         {
             // Arrange
             var codAssunto = 1;
@@ -93,8 +93,8 @@ namespace Tj.Livraria.Tests.Domain.Services
             Assert.Equal(validResult.Descricao, result.Descricao);
         }
 
-        [Trait("AssuntoService", "When getting one"), Fact(DisplayName = "When Invalid Arguments")]
-        public void WhenInvalidArguments()
+        [Trait("AssuntoService", "When getting one"), Fact(DisplayName = "With Invalid Arguments")]
+        public void GetWithInvalidArguments()
         {
             // Arrange
             var codAssunto = 0;
@@ -106,6 +106,50 @@ namespace Tj.Livraria.Tests.Domain.Services
 
             Assert.NotNull(ex);
             Assert.Equal("You need send a valid subject cod", ex.Message);
+        }
+
+        [Trait("AssuntoService", "When updating"), Fact(DisplayName = "With Valid Arguments")]
+        public void UpdateWithValidArguments()
+        {
+            // Arrange
+            var subject = new Assunto
+            {
+                CodAssunto = 1,
+                Descricao = "Terror/Suspense"
+            };
+            Mock<IAssuntoRepository> mock = new Mock<IAssuntoRepository>();
+            mock.Setup(x => x.Get(subject.CodAssunto)).Returns(subject);
+            mock.Setup(x => x.Update(subject)).Returns(true);
+
+            IAssuntoService service = new AssuntoService(mock.Object);
+
+            // Act
+            bool hasUpdated = service.Update(subject);
+
+            // Assert
+            Assert.True(hasUpdated);
+        }
+
+        [Trait("AssuntoService", "When updating"), Fact(DisplayName = "With Invalid Arguments")]
+        public void UpdateWithInvalidArguments()
+        {
+            // Arrange
+            var subject = new Assunto
+            {
+                CodAssunto = 0,
+                Descricao = string.Empty
+            };
+            Mock<IAssuntoRepository> mock = new Mock<IAssuntoRepository>();
+            mock.Setup(x => x.Get(subject.CodAssunto)).Returns(subject);
+            mock.Setup(x => x.Update(subject)).Returns(true);
+
+            IAssuntoService service = new AssuntoService(mock.Object);
+
+            // Act & Assert
+            var ex = Assert.Throws<NullOrEmptyException>(() => service.Update(subject));
+
+            Assert.NotNull(ex);
+            Assert.False(string.IsNullOrWhiteSpace(ex.Message));
         }
     }
 }

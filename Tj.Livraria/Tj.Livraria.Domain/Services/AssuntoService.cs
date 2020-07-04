@@ -44,7 +44,17 @@ namespace Tj.Livraria.Domain.Services
 
         public bool Update(Assunto entity)
         {
-            throw new NotImplementedException();
+            if (entity.CodAssunto < 1)
+                throw new NullOrEmptyException("Cod can't be null or empty");
+
+            if (string.IsNullOrWhiteSpace(entity.Descricao))
+                throw new NullOrEmptyException("Cod can't be null or empty");
+
+            var originalSubject = _repository.Get(entity.CodAssunto);
+
+            originalSubject.Descricao = entity.Descricao;
+
+            return _repository.Update(originalSubject);
         }
     }
 }
