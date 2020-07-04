@@ -31,7 +31,7 @@ namespace Tj.Livraria.Domain.Services
 
         public Assunto Get(int cod)
         {
-            throw new NotImplementedException();
+            return _repository.Get(cod);
         }
 
         public List<Assunto> GetAll()

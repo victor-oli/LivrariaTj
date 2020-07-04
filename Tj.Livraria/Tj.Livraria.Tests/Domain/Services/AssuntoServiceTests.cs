@@ -69,5 +69,28 @@ namespace Tj.Livraria.Tests.Domain.Services
             Assert.True(assuntoList.Count == 1);
             Assert.Equal(validResult[0].Descricao, assuntoList[0].Descricao);
         }
+
+        [Trait("AssuntoService", "When getting one"), Fact(DisplayName = "When Valid Arguments")]
+        public void WhenValidArguments()
+        {
+            // Arrange
+            var codAssunto = 1;
+            var validResult = new Assunto
+            {
+                CodAssunto = codAssunto,
+                Descricao = "Terror"
+            };
+            Mock<IAssuntoRepository> mock = new Mock<IAssuntoRepository>();
+            mock.Setup(x => x.Get(codAssunto)).Returns(validResult);
+
+            IAssuntoService service = new AssuntoService(mock.Object);
+
+            // Act
+            var result = service.Get(codAssunto);
+
+            // Assert
+            Assert.Equal(validResult.CodAssunto, result.CodAssunto);
+            Assert.Equal(validResult.Descricao, result.Descricao);
+        }
     }
 }
