@@ -29,5 +29,21 @@ namespace Tj.Livraria.Presentation.Controllers
                 throw ex;
             }
         }
+
+        [HttpPost]
+        public bool Add(string subjectDescription)
+        {
+            try
+            {
+                return _appService.Add(new Subject
+                {
+                    Description = subjectDescription
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

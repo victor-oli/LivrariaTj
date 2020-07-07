@@ -17,7 +17,7 @@ namespace Tj.Livraria.App.AppServices
 
         public bool Add(Subject entity)
         {
-            throw new NotImplementedException();
+            return _service.Add(entity);
         }
 
         public bool Delete(int cod)
