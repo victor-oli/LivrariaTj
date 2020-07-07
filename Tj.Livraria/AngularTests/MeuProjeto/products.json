@@ -1,0 +1,28 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Mouse Microsoft",
+            "price": 15.9,
+            "promotion": false,
+            "promotionPrice": 0,
+            "image": "mouse.png"
+        },
+        {
+            "id": 2,
+            "name": "Teclado Microsoft",
+            "price": 19,
+            "promotion": false,
+            "promotionPrice": 0,
+            "image": "teclado.png"
+        }
+        {
+            "id": 1,
+            "name": "Monitor Samsung",
+            "price": 150,
+            "promotion": false,
+            "promotionPrice": 0,
+            "image": "monitor.png"
+        }
+    ]
+}
