@@ -39,7 +39,7 @@ namespace Tj.Livraria.Infra.Repositories
 
         public Subject Get(int cod)
         {
-            string query = "Select CodAs, Descricao from Assunto where CodAs = @cod";
+            string query = "Select CodAs as SubjectCod, Descricao as Description from Assunto where CodAs = @cod";
 
             using (var conn = new SqlConnection(ConnectionString))
             {
@@ -52,7 +52,7 @@ namespace Tj.Livraria.Infra.Repositories
 
         public List<Subject> GetAll()
         {
-            string query = "Select CodAs, Descricao from Assunto";
+            string query = "Select CodAs as SubjectCod, Descricao as Description from Assunto";
 
             using(var conn = new SqlConnection(ConnectionString))
             {

@@ -1,0 +1,28 @@
+<h1 id="tableLabel">Lista de Assuntos</h1>
+
+<p>Aqui você pode criar e deletar os assuntos à vontade!</p>
+
+<div style="margin-bottom: 20px;">
+  <a class="btn btn-primary">Novo</a>
+</div>
+
+<!--<p *ngIf="!forecasts"><em>Loading...</em></p>-->
+
+<table class='table table-striped' aria-labelledby="tableLabel">
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sub of subjectList">
+      <td>
+        <p>{{sub.description}}</p>
+      </td>
+      <td class="text-right">
+        <a class="btn btn-danger" (click)="delete(sub.subjectCod)">Deletar</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

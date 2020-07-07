@@ -21,6 +21,7 @@ namespace Tj.Livraria.Presentation
         {
             RepositoryConfig.Config(services);
             ServiceConfig.Config(services);
+            AppServiceConfig.Config(services);
 
             services.AddControllersWithViews();
             services.AddSpaStaticFiles(configuration =>
