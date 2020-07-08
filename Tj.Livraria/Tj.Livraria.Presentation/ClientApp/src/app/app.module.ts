@@ -8,14 +8,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AboutComponent } from './about/about.component';
 import { AppComponent } from './app.component';
 import { rootRouterConfig } from './app.routes';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AddSubjectCompenent } from './subject/add/add-subject.component';
 import { SubjectListComponent } from './subject/subject-list/subject-list.component';
 import { SubjectService } from './subject/subject.service';
 import { UpdateSubjectComponent } from './subject/update/update-subject.component';
+import { DeleteSubjectComponent } from './subject/delete/delete-subject.component';
 
 
 @NgModule({
@@ -23,12 +22,11 @@ import { UpdateSubjectComponent } from './subject/update/update-subject.componen
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     AboutComponent,
     SubjectListComponent,
     AddSubjectCompenent,
-    UpdateSubjectComponent
+    UpdateSubjectComponent,
+    DeleteSubjectComponent
   ],
   imports: [
     ModalModule.forRoot(),
