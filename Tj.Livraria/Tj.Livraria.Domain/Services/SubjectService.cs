@@ -20,6 +20,13 @@ namespace Tj.Livraria.Domain.Services
         {
             entity.IsValidToCreateOrUpdate();
 
+            entity.Description = entity.Description.ToLower();
+
+            Subject existingSubject = _repository.GetByDescription(entity.Description);
+
+            if (existingSubject != null)
+                throw new AlreadyExistsException("Already exists a subject with this description");
+
             return _repository.Add(entity);
         }
 

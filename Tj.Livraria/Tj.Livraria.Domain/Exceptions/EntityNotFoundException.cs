@@ -2,7 +2,7 @@
 
 namespace Tj.Livraria.Domain.Exceptions
 {
-    public class EntityNotFoundException : Exception
+    public class EntityNotFoundException : LibraryException
     {
         public EntityNotFoundException(string message) : base(message) { }
     }

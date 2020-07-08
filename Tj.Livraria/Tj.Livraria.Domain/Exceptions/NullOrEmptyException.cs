@@ -2,7 +2,7 @@
 
 namespace Tj.Livraria.Domain.Exceptions
 {
-    public class NullOrEmptyException : Exception
+    public class NullOrEmptyException : LibraryException
     {
         public NullOrEmptyException(string message) : base(message) { }
     }

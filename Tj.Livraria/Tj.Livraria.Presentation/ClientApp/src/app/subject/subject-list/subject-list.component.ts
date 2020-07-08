@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { SubjectService } from "../subject.service";
 import { Subject } from "../subject";
+import { SubjectService } from "../subject.service";
 
 @Component({
   selector: 'subject-list',
@@ -15,12 +15,13 @@ export class SubjectListComponent implements OnInit {
   ngOnInit(): void {
     this.service.getSubjects()
       .subscribe(
-        subjectListResult => {
-          this.subjectList = subjectListResult;
-          console.log(subjectListResult);
-        },
+        subjectListResult => this.subjectList = subjectListResult,
         error => console.log(error)
       );
+  }
+
+  edit(cod: number) {
+    console.log(cod);
   }
 
   delete(cod: number) {

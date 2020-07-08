@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using Tj.Livraria.App.Interfacies;
+using Tj.Livraria.App.Response;
 using Tj.Livraria.Domain.Entities;
+using Tj.Livraria.Domain.Exceptions;
 
 namespace Tj.Livraria.Presentation.Controllers
 {
@@ -24,26 +26,56 @@ namespace Tj.Livraria.Presentation.Controllers
             {
                 return _appService.GetAll();
             }
-            catch (Exception ex)
+            catch (LibraryException ex)
             {
                 throw ex;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Internal Server Error");
             }
         }
 
         [HttpPost]
-        public bool Add(string subjectDescription)
+        public BaseResponse Add(Subject subject)
         {
+            BaseResponse response = new BaseResponse();
+
             try
             {
-                return _appService.Add(new Subject
-                {
-                    Description = subjectDescription
-                });
+                response.Success = _appService.Add(subject);
             }
-            catch (Exception ex)
+            catch (LibraryException ex)
             {
-                throw ex;
+                response.Message = ex.Message;
             }
+            catch (Exception)
+            {
+                response.Message = "Internal server error";
+            }
+
+            return response;
+        }
+
+        [HttpPut]
+        public BaseResponse Edit(Subject subject)
+        {
+            BaseResponse response = new BaseResponse();
+
+            try
+            {
+                response.Success = _appService.Update(subject);
+            }
+            catch (LibraryException ex)
+            {
+                response.Message = ex.Message;
+            }
+            catch (Exception)
+            {
+                response.Message = "Internal server error";
+            }
+
+            return response;
         }
     }
 }

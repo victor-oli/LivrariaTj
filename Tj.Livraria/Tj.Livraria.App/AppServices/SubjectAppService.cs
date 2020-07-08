@@ -37,7 +37,7 @@ namespace Tj.Livraria.App.AppServices
 
         public bool Update(Subject entity)
         {
-            throw new NotImplementedException();
+            return _service.Update(entity);
         }
     }
 }

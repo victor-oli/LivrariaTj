@@ -19,7 +19,7 @@ namespace Tj.Livraria.Infra.Repositories
             {
                 return conn.Execute(query, new
                 {
-                    entity.Description
+                    Descricao = entity.Description
                 }) == 1;
             }
         }
@@ -58,6 +58,19 @@ namespace Tj.Livraria.Infra.Repositories
             {
                 return conn.Query<Subject>(query)
                     .ToList();
+            }
+        }
+
+        public Subject GetByDescription(string description)
+        {
+            string query = "Select CodAs as SubjectCod, Descricao as Description from Assunto where Descricao = @description";
+
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                return conn.Query<Subject>(query, new
+                {
+                    description
+                }).FirstOrDefault();
             }
         }
 

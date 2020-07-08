@@ -1,0 +1,30 @@
+<div style="margin-bottom: 20px;">
+  <a class="btn btn-success" (click)="openModal(template)">Novo</a>
+</div>
+
+<ng-template #template>
+  <alert type="danger" [hidden]="showAlert==false">
+    <strong>ERROR! </strong>{{alertMessage}}
+  </alert>
+
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Novo Assunto</h4>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Descrição</label>
+        <input class="form-control" type="text" required [(ngModel)]="description" name="description" value="{{description}}" />
+      </div>
+
+      <div>
+        <button class="form-control btn btn-primary" type="submit">Adicionar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

@@ -15,6 +15,9 @@ import { DataBindingComponent } from './demos/data-binding/data-binding.componen
 import { ProductService } from './products/product.service';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ChildAndParentComponent } from './child-and-parent/child-and-parent.component';
+import { HeroChildComponent } from './child-and-parent/hero-child/hero-child.component';
+import { HeroParentComponent } from './child-and-parent/hero-parent/hero-parent.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
     AboutComponent,
     ContactComponent,
     DataBindingComponent,
-    ProductListComponent
+    ProductListComponent,
+    HeroChildComponent,
+    HeroParentComponent
   ],
   imports: [
     BrowserModule,

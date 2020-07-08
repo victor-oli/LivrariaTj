@@ -1,17 +1,14 @@
 <h1 id="tableLabel">Lista de Assuntos</h1>
 
-<p>Aqui você pode criar e deletar os assuntos à vontade!</p>
+<p>Aqui você pode criar, editar e deletar os assuntos à vontade!</p>
 
-<div style="margin-bottom: 20px;">
-  <a class="btn btn-primary">Novo</a>
-</div>
+<p *ngIf="!subjectList"><em>Loading...</em></p>
 
-<!--<p *ngIf="!forecasts"><em>Loading...</em></p>-->
-
-<table class='table table-striped' aria-labelledby="tableLabel">
-  <thead>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="subjectList">
+  <thead class="thead-dark">
     <tr>
       <th>Descrição</th>
+      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -20,9 +17,14 @@
       <td>
         <p>{{sub.description}}</p>
       </td>
-      <td class="text-right">
+      <td class="text-right" style="width: 100px;">
+        <a class="btn btn-primary" (click)="edit(sub.subjectCod)">Editar</a>
+      </td>
+      <td class="text-right" style="width: 100px;">
         <a class="btn btn-danger" (click)="delete(sub.subjectCod)">Deletar</a>
       </td>
     </tr>
   </tbody>
 </table>
+
+<add-subject></add-subject>

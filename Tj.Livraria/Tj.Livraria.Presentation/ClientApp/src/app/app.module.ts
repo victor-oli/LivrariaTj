@@ -1,17 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { AboutComponent } from './about/about.component';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { AboutComponent } from './about/about.component';
-import { SubjectService } from './subject/subject.service';
+import { HomeComponent } from './home/home.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { AddSubjectCompenent } from './subject/add/add-subject.component';
 import { SubjectListComponent } from './subject/subject-list/subject-list.component';
+import { SubjectService } from './subject/subject.service';
+
 
 @NgModule({
   declarations: [
@@ -21,9 +24,12 @@ import { SubjectListComponent } from './subject/subject-list/subject-list.compon
     CounterComponent,
     FetchDataComponent,
     AboutComponent,
-    SubjectListComponent
+    SubjectListComponent,
+    AddSubjectCompenent,
   ],
   imports: [
+    ModalModule.forRoot(),
+    AlertModule.forRoot(),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
@@ -33,6 +39,7 @@ import { SubjectListComponent } from './subject/subject-list/subject-list.compon
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'about', component: AboutComponent },
       { path: 'subject-list', component: SubjectListComponent },
+      { path: 'add-subject', component: AddSubjectCompenent },
     ])
   ],
   providers: [
