@@ -18,7 +18,7 @@
         <p>{{sub.description | titlecase}}</p>
       </td>
       <td class="text-right" style="width: 100px;">
-        <a class="btn btn-primary" (click)="edit(sub.subjectCod)">Editar</a>
+        <update-subject [subjectCod]="sub.subjectCod" [subjectDescription]="sub.description" (onCloseEvent)="onRefresh()"></update-subject>
       </td>
       <td class="text-right" style="width: 100px;">
         <a class="btn btn-danger" (click)="delete(sub.subjectCod)">Deletar</a>
@@ -28,3 +28,4 @@
 </table>
 
 <add-subject (onCloseEvent)="onRefresh()"></add-subject>
+

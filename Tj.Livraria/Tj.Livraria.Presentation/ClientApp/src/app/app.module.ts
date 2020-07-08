@@ -7,6 +7,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AboutComponent } from './about/about.component';
 import { AppComponent } from './app.component';
+import { rootRouterConfig } from './app.routes';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { HomeComponent } from './home/home.component';
@@ -14,8 +15,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AddSubjectCompenent } from './subject/add/add-subject.component';
 import { SubjectListComponent } from './subject/subject-list/subject-list.component';
 import { SubjectService } from './subject/subject.service';
-import { EditSubjectComponent } from './subject/edit/edit-subject.component';
-import { rootRouterConfig } from './app.routes';
+import { UpdateSubjectComponent } from './subject/update/update-subject.component';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import { rootRouterConfig } from './app.routes';
     AboutComponent,
     SubjectListComponent,
     AddSubjectCompenent,
-    EditSubjectComponent
+    UpdateSubjectComponent
   ],
   imports: [
     ModalModule.forRoot(),

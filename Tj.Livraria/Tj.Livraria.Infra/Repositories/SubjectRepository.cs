@@ -76,14 +76,14 @@ namespace Tj.Livraria.Infra.Repositories
 
         public bool Update(Subject entity)
         {
-            string query = "Update Assunto (Descricao) set (@Descricao) where CodAs = @cod";
+            string query = "Update Assunto set Descricao = @Descricao where CodAs = @cod";
 
             using (var conn = new SqlConnection(ConnectionString))
             {
                 return conn.Execute(query, new
                 {
                     cod = entity.SubjectCod,
-                    entity.Description
+                    Descricao = entity.Description
                 }) == 1;
             }
         }

@@ -70,7 +70,7 @@ namespace Tj.Livraria.Presentation.Controllers
             {
                 response.Message = ex.Message;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 response.Message = "Internal server error";
             }

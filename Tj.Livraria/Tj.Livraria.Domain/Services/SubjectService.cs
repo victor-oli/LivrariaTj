@@ -55,10 +55,17 @@ namespace Tj.Livraria.Domain.Services
         {
             entity.IsValidToCreateOrUpdate();
 
+            entity.Description = entity.Description.ToLower();
+
             var originalSubject = _repository.Get(entity.SubjectCod);
 
             if (originalSubject == null)
                 throw new EntityNotFoundException($"Subject not found, cod: {entity.SubjectCod}");
+
+            var subjectWithSameName = _repository.GetByDescription(entity.Description);
+
+            if (subjectWithSameName != null && subjectWithSameName.SubjectCod != entity.SubjectCod)
+                throw new AlreadyExistsException("Already exists a subject with this description");
 
             return _repository.Update(entity);
         }
