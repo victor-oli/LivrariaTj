@@ -14,6 +14,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AddSubjectCompenent } from './subject/add/add-subject.component';
 import { SubjectListComponent } from './subject/subject-list/subject-list.component';
 import { SubjectService } from './subject/subject.service';
+import { EditSubjectComponent } from './subject/edit/edit-subject.component';
+import { rootRouterConfig } from './app.routes';
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { SubjectService } from './subject/subject.service';
     AboutComponent,
     SubjectListComponent,
     AddSubjectCompenent,
+    EditSubjectComponent
   ],
   imports: [
     ModalModule.forRoot(),
@@ -33,15 +36,7 @@ import { SubjectService } from './subject/subject.service';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'about', component: AboutComponent },
-      { path: 'subject-list', component: SubjectListComponent },
-      { path: 'add-subject', component: AddSubjectCompenent },
-    ])
-  ],
+    RouterModule.forRoot(rootRouterConfig, { useHash: false, onSameUrlNavigation: 'reload' })],
   providers: [
     SubjectService
   ],

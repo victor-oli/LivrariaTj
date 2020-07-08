@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output, TemplateRef } from "@angular/core";
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SubjectService } from "../subject.service";
 
@@ -13,6 +13,8 @@ export class AddSubjectCompenent implements OnInit {
   public showAlert: boolean = false;
   public alertMessage: string;
 
+  @Output() onCloseEvent = new EventEmitter<any>();
+
   constructor(private service: SubjectService, private modalService: BsModalService) { }
 
   ngOnInit(): void { }
@@ -26,8 +28,6 @@ export class AddSubjectCompenent implements OnInit {
             this.showAlert = true;
             this.alertMessage = result.message;
 
-            //this.ngOnInit();
-
             return;
           }
 
@@ -35,6 +35,7 @@ export class AddSubjectCompenent implements OnInit {
           this.alertMessage = '';
           this.description = '';
           this.modalRef.hide();
+          this.onCloseEvent.emit();
         },
         error => {
           this.showAlert = true;

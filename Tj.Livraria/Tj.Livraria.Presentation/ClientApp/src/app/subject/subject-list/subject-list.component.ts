@@ -27,4 +27,14 @@ export class SubjectListComponent implements OnInit {
   delete(cod: number) {
     console.log(cod);
   }
+
+  onRefresh() {
+    console.log('onRefresh foi chamado!');
+
+    this.service.getSubjects()
+      .subscribe(
+        subjectListResult => this.subjectList = subjectListResult,
+        error => console.log(error)
+      );
+  }
 }
