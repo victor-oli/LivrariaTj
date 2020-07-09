@@ -24,4 +24,9 @@ export class SubjectService {
     return this.http
       .put<ResponseBase>(this.serviceUrl + "/api/Subject", subject);
   }
+
+  deleteSubject(subjectCod: number): Observable<ResponseBase> {
+    return this.http
+      .delete<ResponseBase>(this.serviceUrl + "/api/Subject?subjectCod=" + subjectCod);
+  }
 }

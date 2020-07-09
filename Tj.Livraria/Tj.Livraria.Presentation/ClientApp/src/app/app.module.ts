@@ -15,6 +15,7 @@ import { SubjectListComponent } from './subject/subject-list/subject-list.compon
 import { SubjectService } from './subject/subject.service';
 import { UpdateSubjectComponent } from './subject/update/update-subject.component';
 import { DeleteSubjectComponent } from './subject/delete/delete-subject.component';
+import { AlertComponent } from './alert/alert.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { DeleteSubjectComponent } from './subject/delete/delete-subject.componen
     SubjectListComponent,
     AddSubjectCompenent,
     UpdateSubjectComponent,
-    DeleteSubjectComponent
+    DeleteSubjectComponent,
+    AlertComponent
   ],
   imports: [
     ModalModule.forRoot(),

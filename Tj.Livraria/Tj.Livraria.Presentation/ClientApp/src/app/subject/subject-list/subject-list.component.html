@@ -4,6 +4,8 @@
 
 <p *ngIf="!subjectList"><em>Loading...</em></p>
 
+<custom-alert *ngIf="alerts" [alerts]="alerts" (onRemoveAlert)="removeAlert($event)"></custom-alert>
+
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="subjectList">
   <thead class="thead-dark">
     <tr>
@@ -21,7 +23,7 @@
         <update-subject [subjectCod]="sub.subjectCod" [subjectDescription]="sub.description" (onCloseEvent)="onRefresh()"></update-subject>
       </td>
       <td class="text-right" style="width: 100px;">
-        <delete-subject></delete-subject>
+        <delete-subject [subjectCod]="sub.subjectCod" [subjectDescription]="sub.description"(onCloseEvent)="onRefresh()" (onCantDeleteEvent)="showAlert($event)"></delete-subject>
       </td>
     </tr>
   </tbody>

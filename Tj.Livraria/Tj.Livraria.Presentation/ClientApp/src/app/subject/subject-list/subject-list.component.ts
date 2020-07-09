@@ -11,6 +11,7 @@ export class SubjectListComponent implements OnInit {
   constructor(private service: SubjectService) { }
 
   public subjectList: Subject[];
+  public alerts: any[] = [];
 
   ngOnInit(): void {
     this.service.getSubjects()
@@ -26,5 +27,17 @@ export class SubjectListComponent implements OnInit {
         subjectListResult => this.subjectList = subjectListResult,
         error => console.log(error)
       );
+  }
+
+  showAlert(event: any) {
+    this.alerts.push({
+      type: event.type,
+      msg: event.message,
+      timeout: 5000
+    });
+  }
+
+  removeAlert(event: any) {
+    this.alerts = event;
   }
 }
