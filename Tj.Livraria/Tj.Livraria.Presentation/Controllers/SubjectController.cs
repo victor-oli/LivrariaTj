@@ -70,6 +70,27 @@ namespace Tj.Livraria.Presentation.Controllers
             {
                 response.Message = ex.Message;
             }
+            catch (Exception)
+            {
+                response.Message = "Internal server error";
+            }
+
+            return response;
+        }
+
+        [HttpDelete]
+        public BaseResponse Delete(int subjectCod)
+        {
+            BaseResponse response = new BaseResponse();
+
+            try
+            {
+                response.Success = _appService.Delete(subjectCod);
+            }
+            catch (LibraryException ex)
+            {
+                response.Message = ex.Message;
+            }
             catch (Exception ex)
             {
                 response.Message = "Internal server error";

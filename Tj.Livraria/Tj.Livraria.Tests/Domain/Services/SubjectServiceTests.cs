@@ -23,7 +23,7 @@ namespace Tj.Livraria.Tests.Domain.Services
             Mock<ISubjectRepository> mock = new Mock<ISubjectRepository>();
             mock.Setup(x => x.Add(subject)).Returns(true);
 
-            ISubjectService service = new SubjectService(mock.Object);
+            ISubjectService service = new SubjectService(mock.Object, null);
 
             // Act
             bool hasAdded = service.Add(subject);
@@ -40,7 +40,7 @@ namespace Tj.Livraria.Tests.Domain.Services
 
             Mock<ISubjectRepository> mock = new Mock<ISubjectRepository>();
 
-            ISubjectService service = new SubjectService(mock.Object);
+            ISubjectService service = new SubjectService(mock.Object, null);
 
             // Act & Assert
             var ex = Assert.Throws<NullOrEmptyException>(() => service.Add(subject));
@@ -60,7 +60,7 @@ namespace Tj.Livraria.Tests.Domain.Services
             Mock<ISubjectRepository> mock = new Mock<ISubjectRepository>();
             mock.Setup(x => x.GetAll()).Returns(validResult);
 
-            ISubjectService service = new SubjectService(mock.Object);
+            ISubjectService service = new SubjectService(mock.Object, null);
 
             // Act
             var subjectList = service.GetAll();
@@ -83,7 +83,7 @@ namespace Tj.Livraria.Tests.Domain.Services
             Mock<ISubjectRepository> mock = new Mock<ISubjectRepository>();
             mock.Setup(x => x.Get(subjectCod)).Returns(validResult);
 
-            ISubjectService service = new SubjectService(mock.Object);
+            ISubjectService service = new SubjectService(mock.Object, null);
 
             // Act
             var result = service.Get(subjectCod);
@@ -99,7 +99,7 @@ namespace Tj.Livraria.Tests.Domain.Services
             // Arrange
             var subjectCod = 0;
             Mock<ISubjectRepository> mock = new Mock<ISubjectRepository>();
-            ISubjectService service = new SubjectService(mock.Object);
+            ISubjectService service = new SubjectService(mock.Object, null);
 
             // Act & Assert
             var ex = Assert.Throws<NullOrEmptyException>(() => service.Get(subjectCod));
@@ -121,7 +121,7 @@ namespace Tj.Livraria.Tests.Domain.Services
             mock.Setup(x => x.Get(subject.SubjectCod)).Returns(subject);
             mock.Setup(x => x.Update(subject)).Returns(true);
 
-            ISubjectService service = new SubjectService(mock.Object);
+            ISubjectService service = new SubjectService(mock.Object, null);
 
             // Act
             bool hasUpdated = service.Update(subject);
@@ -143,7 +143,7 @@ namespace Tj.Livraria.Tests.Domain.Services
             mock.Setup(x => x.Get(subject.SubjectCod)).Returns(subject);
             mock.Setup(x => x.Update(subject)).Returns(true);
 
-            ISubjectService service = new SubjectService(mock.Object);
+            ISubjectService service = new SubjectService(mock.Object, null);
 
             // Act & Assert
             var ex = Assert.Throws<NullOrEmptyException>(() => service.Update(subject));
@@ -160,7 +160,10 @@ namespace Tj.Livraria.Tests.Domain.Services
             Mock<ISubjectRepository> mock = new Mock<ISubjectRepository>();
             mock.Setup(x => x.Delete(subjectCod)).Returns(true);
 
-            ISubjectService service = new SubjectService(mock.Object);
+            Mock<IBookRepository> bookMock = new Mock<IBookRepository>();
+            bookMock.Setup(x => x.GetAllBySubject(subjectCod)).Returns(new List<Book>());
+
+            ISubjectService service = new SubjectService(mock.Object, bookMock.Object);
 
             // Act
             bool hasDeleted = service.Delete(subjectCod);
@@ -175,7 +178,7 @@ namespace Tj.Livraria.Tests.Domain.Services
             // Arrange
             var subjectCod = 0;
             Mock<ISubjectRepository> mock = new Mock<ISubjectRepository>();
-            ISubjectService service = new SubjectService(mock.Object);
+            ISubjectService service = new SubjectService(mock.Object, null);
 
             // Act & Assert
             var ex = Assert.Throws<NullOrEmptyException>(() => service.Delete(subjectCod));

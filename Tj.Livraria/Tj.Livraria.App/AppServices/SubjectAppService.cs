@@ -22,7 +22,7 @@ namespace Tj.Livraria.App.AppServices
 
         public bool Delete(int cod)
         {
-            throw new NotImplementedException();
+            return _service.Delete(cod);
         }
 
         public Subject Get(int cod)

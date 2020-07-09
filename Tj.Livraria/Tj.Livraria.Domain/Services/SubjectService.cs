@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Tj.Livraria.Domain.Entities;
 using Tj.Livraria.Domain.Exceptions;
 using Tj.Livraria.Domain.Interfaces.Repository;
@@ -10,10 +11,12 @@ namespace Tj.Livraria.Domain.Services
     public class SubjectService : ISubjectService
     {
         private ISubjectRepository _repository;
+        private IBookRepository _bookRepository;
 
-        public SubjectService(ISubjectRepository repository)
+        public SubjectService(ISubjectRepository repository, IBookRepository bookRepository)
         {
             _repository = repository;
+            _bookRepository = bookRepository;
         }
 
         public bool Add(Subject entity)
@@ -34,6 +37,11 @@ namespace Tj.Livraria.Domain.Services
         {
             if (cod < 1)
                 throw new NullOrEmptyException("You need send a valid subject cod");
+
+            List<Book> associatedBooks = _bookRepository.GetAllBySubject(cod);
+
+            if (associatedBooks.Any())
+                throw new RelationshipViolationException("Can't delete this subject, he is in use");
 
             return _repository.Delete(cod);
         }

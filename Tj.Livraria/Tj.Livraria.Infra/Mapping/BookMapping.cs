@@ -1,4 +1,5 @@
-﻿using Tj.Livraria.Domain.Entities;
+﻿using System.Collections.Generic;
+using Tj.Livraria.Domain.Entities;
 
 namespace Tj.Livraria.Infra.Mapping
 {
@@ -15,6 +16,19 @@ namespace Tj.Livraria.Infra.Mapping
                 PublicationYear = book.AnoPublicacao,
                 Title = book.Titulo
             };
+        }
+
+        public static Book MapWithBookRelationship(dynamic book)
+        {
+            Book bookEntity = Map(book);
+
+            bookEntity.BookSubjects.Add(new Subject
+            {
+                SubjectCod = book.CodAs,
+                Description = book.AssuntoDescricao
+            });
+
+            return bookEntity;
         }
     }
 }
