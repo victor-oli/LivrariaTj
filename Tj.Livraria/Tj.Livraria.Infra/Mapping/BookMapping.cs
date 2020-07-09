@@ -18,7 +18,7 @@ namespace Tj.Livraria.Infra.Mapping
             };
         }
 
-        public static Book MapWithBookRelationship(dynamic book)
+        public static Book MapWithSubjectRelationship(dynamic book)
         {
             Book bookEntity = Map(book);
 
@@ -26,6 +26,19 @@ namespace Tj.Livraria.Infra.Mapping
             {
                 SubjectCod = book.CodAs,
                 Description = book.AssuntoDescricao
+            });
+
+            return bookEntity;
+        }
+
+        public static Book MapWithAuthorRelationship(dynamic book)
+        {
+            Book bookEntity = Map(book);
+
+            bookEntity.BookAuthors.Add(new Author
+            {
+                AuthorCod = book.CodAu,
+                Name = book.AuthorName
             });
 
             return bookEntity;

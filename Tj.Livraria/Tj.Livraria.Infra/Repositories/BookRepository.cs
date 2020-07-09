@@ -78,6 +78,30 @@ namespace Tj.Livraria.Infra.Repositories
             }
         }
 
+        public List<Book> GetAllByAuthor(int authorCod)
+        {
+            string query = @"Select l.Codl, l.Titulo, l.Editora, l.Edicao, l.AnoPublicacao, l.Valor, a.CodAu, a.Nome AuthorName
+                                from livro l
+                                inner join Livro_Autor la on la.Livro_Codl = l.Codl
+                                inner join Autor a on a.CodAu = la.Autor_CodAu
+                                where a.CodAu = @authorCod";
+
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                var result = conn.Query<dynamic>(query, new
+                {
+                    authorCod
+                }).ToList();
+
+                List<Book> bookList = new List<Book>();
+
+                result.ForEach(x =>
+                    bookList.Add(BookMapping.MapWithAuthorRelationship(x)));
+
+                return bookList;
+            }
+        }
+
         public List<Book> GetAllBySubject(int subjectCod)
         {
             string query = @"Select l.Codl, l.Titulo, l.Editora, l.Edicao, l.AnoPublicacao, l.Valor, a.CodAs, a.Descricao assuntoDescricao
@@ -98,7 +122,7 @@ namespace Tj.Livraria.Infra.Repositories
                 List<Book> bookList = new List<Book>();
 
                 result.ForEach(x =>
-                    bookList.Add(BookMapping.MapWithBookRelationship(x)));
+                    bookList.Add(BookMapping.MapWithSubjectRelationship(x)));
 
                 return bookList;
             }

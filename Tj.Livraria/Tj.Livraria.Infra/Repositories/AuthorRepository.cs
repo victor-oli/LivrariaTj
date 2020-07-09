@@ -72,6 +72,21 @@ namespace Tj.Livraria.Infra.Repositories
             }
         }
 
+        public Author GetByName(string name)
+        {
+            string query = "Select CodAu, Nome from Autor where Nome = @name";
+
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                var author = conn.QueryFirstOrDefault<dynamic>(query, new
+                {
+                    name
+                });
+
+                return AuthorMapping.Map(author);
+            }
+        }
+
         public bool Update(Author entity)
         {
             string query = "Update Autor (Nome) set (@Nome) where CodAu = @cod";
