@@ -18,6 +18,7 @@ import { DeleteSubjectComponent } from './subject/delete/delete-subject.componen
 import { AlertComponent } from './alert/alert.component';
 import { ListAuthorComponent } from './author/list/list-author.component';
 import { AuthorService } from './author/author.service';
+import { AddAuthorComponent } from './author/add/add-author.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AuthorService } from './author/author.service';
     UpdateSubjectComponent,
     DeleteSubjectComponent,
     AlertComponent,
-    ListAuthorComponent
+    ListAuthorComponent,
+    AddAuthorComponent
   ],
   imports: [
     ModalModule.forRoot(),

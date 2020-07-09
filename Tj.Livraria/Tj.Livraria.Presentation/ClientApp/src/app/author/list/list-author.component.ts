@@ -12,12 +12,19 @@ export class ListAuthorComponent implements OnInit {
 
   constructor(private service: AuthorService) { }
 
-  ngOnInit(): void {
+  private getAuthors() {
     this.service
       .getAll()
       .subscribe(
         result => this.authors = result,
-        error => console.log(error)
-      );
+        error => console.log(error));
+  }
+
+  ngOnInit(): void {
+    this.getAuthors();
+  }
+
+  refresh() {
+    this.getAuthors();
   }
 }
