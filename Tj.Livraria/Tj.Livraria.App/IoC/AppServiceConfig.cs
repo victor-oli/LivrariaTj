@@ -9,6 +9,7 @@ namespace Tj.Livraria.App.IoC
         public static void Config(IServiceCollection collection)
         {
             collection.AddScoped<ISubjectAppService, SubjectAppService>();
+            collection.AddScoped<IAuthorAppService, AuthorAppService>();
         }
     }
 }
