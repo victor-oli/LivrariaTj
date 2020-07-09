@@ -16,6 +16,8 @@ import { SubjectService } from './subject/subject.service';
 import { UpdateSubjectComponent } from './subject/update/update-subject.component';
 import { DeleteSubjectComponent } from './subject/delete/delete-subject.component';
 import { AlertComponent } from './alert/alert.component';
+import { ListAuthorComponent } from './author/list/list-author.component';
+import { AuthorService } from './author/author.service';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { AlertComponent } from './alert/alert.component';
     AddSubjectCompenent,
     UpdateSubjectComponent,
     DeleteSubjectComponent,
-    AlertComponent
+    AlertComponent,
+    ListAuthorComponent
   ],
   imports: [
     ModalModule.forRoot(),
@@ -38,7 +41,8 @@ import { AlertComponent } from './alert/alert.component';
     FormsModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false, onSameUrlNavigation: 'reload' })],
   providers: [
-    SubjectService
+    SubjectService,
+    AuthorService
   ],
   bootstrap: [AppComponent]
 })

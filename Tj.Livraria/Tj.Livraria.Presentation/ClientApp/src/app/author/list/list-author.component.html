@@ -1,0 +1,26 @@
+<h1 id="tableLabel">Lista de Autores</h1>
+
+<p>Aqui você pode criar, editar e deletar os autores à vontade!</p>
+
+<p *ngIf="!authors"><em>Loading...</em></p>
+
+<table class="table table-striped" aria-labelledby="tableLabel" *ngIf="authors">
+  <thead class="thead-dark">
+    <tr>
+      <th>Nome</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let author of authors">
+      <td>{{author.name | titlecase}}</td>
+      <td class="text-right" style="width: 100px;">
+        Editar
+      </td>
+      <td class="text-right" style="width: 100px;">
+        Deletar
+      </td>
+    </tr>
+  </tbody>
+</table>
