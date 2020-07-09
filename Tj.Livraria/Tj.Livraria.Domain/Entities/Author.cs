@@ -14,6 +14,9 @@ namespace Tj.Livraria.Domain.Entities
         {
             if (string.IsNullOrWhiteSpace(Name))
                 throw new NullOrEmptyException("Name can't be null or empty");
+
+            if (Name.Length > 40)
+                throw new FormatException("Name can't be bigger then 40 characters");
         }
     }
 }
