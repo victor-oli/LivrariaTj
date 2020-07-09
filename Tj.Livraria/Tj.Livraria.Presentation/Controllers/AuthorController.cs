@@ -10,82 +10,57 @@ namespace Tj.Livraria.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubjectController : ControllerBase
+    public class AuthorController : ControllerBase
     {
-        private ISubjectAppService _appService;
+        private IAuthorAppService _appService;
 
-        public SubjectController(ISubjectAppService appService)
+        public AuthorController(IAuthorAppService appService)
         {
-            this._appService = appService;
+            _appService = appService;
         }
 
         [HttpGet]
-        public IList<Subject> GetSubjectList()
+        public List<Author> GetAll()
         {
             try
             {
                 return _appService.GetAll();
             }
-            catch (LibraryException ex)
+            catch (Exception ex)
             {
                 throw ex;
-            }
-            catch (Exception)
-            {
-                throw new Exception("Internal Server Error");
             }
         }
 
         [HttpPost]
-        public ResponseBase Add(Subject subject)
+        public ResponseBase Add(Author author)
         {
             ResponseBase response = new ResponseBase();
 
             try
             {
-                response.Success = _appService.Add(subject);
+                response.Success = _appService.Add(author);
             }
-            catch (LibraryException ex)
+            catch(LibraryException ex)
             {
                 response.Message = ex.Message;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                response.Message = "Internal server error";
+                throw ex;
             }
 
             return response;
         }
 
         [HttpPut]
-        public ResponseBase Edit(Subject subject)
+        public ResponseBase Update(Author author)
         {
             ResponseBase response = new ResponseBase();
 
             try
             {
-                response.Success = _appService.Update(subject);
-            }
-            catch (LibraryException ex)
-            {
-                response.Message = ex.Message;
-            }
-            catch (Exception)
-            {
-                response.Message = "Internal server error";
-            }
-
-            return response;
-        }
-
-        [HttpDelete]
-        public ResponseBase Delete(int subjectCod)
-        {
-            ResponseBase response = new ResponseBase();
-
-            try
-            {
-                response.Success = _appService.Delete(subjectCod);
+                response.Success = _appService.Update(author);
             }
             catch (LibraryException ex)
             {
@@ -93,7 +68,28 @@ namespace Tj.Livraria.Presentation.Controllers
             }
             catch (Exception ex)
             {
-                response.Message = "Internal server error";
+                throw ex;
+            }
+
+            return response;
+        }
+
+        [HttpDelete]
+        public ResponseBase Delete(int authorCod)
+        {
+            ResponseBase response = new ResponseBase();
+
+            try
+            {
+                response.Success = _appService.Delete(authorCod);
+            }
+            catch (LibraryException ex)
+            {
+                response.Message = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             return response;
