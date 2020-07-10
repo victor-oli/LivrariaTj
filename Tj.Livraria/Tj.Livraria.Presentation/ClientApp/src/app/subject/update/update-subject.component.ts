@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, TemplateRef } from "@angular/core";
+import { Component, EventEmitter, Input, Output, TemplateRef, OnInit } from "@angular/core";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { SubjectService } from "../subject.service";
 
@@ -7,10 +7,11 @@ import { SubjectService } from "../subject.service";
   templateUrl: './update-subject.component.html'
 })
 
-export class UpdateSubjectComponent {
+export class UpdateSubjectComponent implements OnInit {
   @Input() public subjectCod: number;
   @Input() public subjectDescription: string;
 
+  private modalTitle: string;
   private errorAlert: boolean = false;
   private errorMessage: string;
   private modalRef: BsModalRef;
@@ -18,6 +19,10 @@ export class UpdateSubjectComponent {
   @Output() onCloseEvent = new EventEmitter<any>();
 
   constructor(private service: SubjectService, private modalService: BsModalService) { }
+
+  ngOnInit() {
+    this.modalTitle = this.subjectDescription;
+  }
 
   onSubmit() {
     this.service.updateSubject({
