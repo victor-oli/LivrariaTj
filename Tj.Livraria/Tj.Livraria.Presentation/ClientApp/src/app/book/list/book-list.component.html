@@ -1,0 +1,56 @@
+<h1 id="tableLabel">Lista de Assuntos</h1>
+
+<p>Aqui você pode criar, editar e deletar os assuntos à vontade!</p>
+
+<p *ngIf="!books"><em>Loading...</em></p>
+
+<custom-alert *ngIf="alerts" [alerts]="alerts" (onRemoveAlert)="removeAlert($event)"></custom-alert>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>
+        Titulo
+      </th>
+      <th>
+        Edição
+      </th>
+      <th>
+        Preço
+      </th>
+      <th>
+        Editora
+      </th>
+      <th>
+        Ano
+      </th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of books">
+      <td>
+        {{book.title | titlecase}}
+      </td>
+      <td>
+        {{book.edition}}
+      </td>
+      <td>
+        {{book.price | currency}}
+      </td>
+      <td>
+        {{book.publishingCompany | titlecase}}
+      </td>
+      <td>
+        {{book.publicationYear}}
+      </td>
+      <td>
+        Editar
+      </td>
+      <td>
+        Deletar
+      </td>
+    </tr>
+  </tbody>
+</table>

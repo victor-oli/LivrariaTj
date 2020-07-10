@@ -21,6 +21,8 @@ import { AuthorService } from './author/author.service';
 import { AddAuthorComponent } from './author/add/add-author.component';
 import { UpdateAuthorComponent } from './author/update/update-author.component';
 import { DeleteAuthorComponent } from './author/delete/delete-author.component';
+import { BookService } from './book/book.service';
+import { BookListComponent } from './book/list/book-list.component';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { DeleteAuthorComponent } from './author/delete/delete-author.component';
     ListAuthorComponent,
     AddAuthorComponent,
     UpdateAuthorComponent,
-    DeleteAuthorComponent
+    DeleteAuthorComponent,
+    BookListComponent
   ],
   imports: [
     ModalModule.forRoot(),
@@ -48,7 +51,8 @@ import { DeleteAuthorComponent } from './author/delete/delete-author.component';
     RouterModule.forRoot(rootRouterConfig, { useHash: false, onSameUrlNavigation: 'reload' })],
   providers: [
     SubjectService,
-    AuthorService
+    AuthorService,
+    BookService
   ],
   bootstrap: [AppComponent]
 })
