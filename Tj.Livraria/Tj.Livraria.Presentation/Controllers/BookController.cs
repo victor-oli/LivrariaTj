@@ -32,7 +32,7 @@ namespace Tj.Livraria.Presentation.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet, Route("/book/{bookCod}")]
         public Book Get(int bookCod)
         {
             try
