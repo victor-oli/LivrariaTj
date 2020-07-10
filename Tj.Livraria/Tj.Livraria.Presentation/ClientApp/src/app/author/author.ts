@@ -1,4 +1,4 @@
 export class Author {
-  public cod: number;
+  public authorCod: number;
   public name: string;
 }

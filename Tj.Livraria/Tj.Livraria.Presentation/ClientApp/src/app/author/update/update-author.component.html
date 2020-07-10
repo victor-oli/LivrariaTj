@@ -1,0 +1,28 @@
+<button class="btn btn-primary" (click)="openModal(template)">Editar</button>
+
+<ng-template #template>
+  <alert type="danger" [hidden]="errorAlert==false">
+    <strong>ERROR! </strong>{{errorMessage}}
+  </alert>
+
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{modalTitle | titlecase}}</h4>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Nome</label>
+        <input class="form-control" type="text" required [(ngModel)]="authorName" name="authorName" value="{{authorName}}" />
+      </div>
+
+      <div>
+        <button class="form-control btn btn-primary" type="submit">Salvar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

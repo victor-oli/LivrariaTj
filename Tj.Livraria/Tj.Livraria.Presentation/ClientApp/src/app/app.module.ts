@@ -19,6 +19,7 @@ import { AlertComponent } from './alert/alert.component';
 import { ListAuthorComponent } from './author/list/list-author.component';
 import { AuthorService } from './author/author.service';
 import { AddAuthorComponent } from './author/add/add-author.component';
+import { UpdateAuthorComponent } from './author/update/update-author.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AddAuthorComponent } from './author/add/add-author.component';
     DeleteSubjectComponent,
     AlertComponent,
     ListAuthorComponent,
-    AddAuthorComponent
+    AddAuthorComponent,
+    UpdateAuthorComponent
   ],
   imports: [
     ModalModule.forRoot(),

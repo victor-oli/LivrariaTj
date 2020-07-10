@@ -16,7 +16,7 @@
     <tr *ngFor="let author of authors">
       <td>{{author.name | titlecase}}</td>
       <td class="text-right" style="width: 100px;">
-        Editar
+        <update-author [authorCod]="author.authorCod" [authorName]="author.name" (onUpdateEvent)="refresh()"></update-author>
       </td>
       <td class="text-right" style="width: 100px;">
         Deletar
