@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Author } from "../author";
 import { AuthorService } from "../author.service";
 
@@ -9,6 +9,7 @@ import { AuthorService } from "../author.service";
 
 export class ListAuthorComponent implements OnInit {
   private authors: Author[] = [];
+  @Input() alerts = [];
 
   constructor(private service: AuthorService) { }
 
@@ -26,5 +27,17 @@ export class ListAuthorComponent implements OnInit {
 
   refresh() {
     this.getAuthors();
+  }
+
+  addAlert(alert) {
+    this.alerts.push({
+      type: alert.type,
+      msg: alert.message,
+      timeout: 5000
+    });
+  }
+
+  removeAlert(event: any) {
+    this.alerts = event;
   }
 }

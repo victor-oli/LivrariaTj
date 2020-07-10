@@ -4,6 +4,8 @@
 
 <p *ngIf="!authors"><em>Loading...</em></p>
 
+<custom-alert *ngIf="alerts" [alerts]="alerts" (onRemoveAlert)="removeAlert($event)"></custom-alert>
+
 <table class="table table-striped" aria-labelledby="tableLabel" *ngIf="authors">
   <thead class="thead-dark">
     <tr>
@@ -19,7 +21,7 @@
         <update-author [authorCod]="author.authorCod" [authorName]="author.name" (onUpdateEvent)="refresh()"></update-author>
       </td>
       <td class="text-right" style="width: 100px;">
-        Deletar
+        <delete-author [authorCod]="author.authorCod" [authorName]="author.name" (onDeleteEvent)="refresh()" (onAlertEvent)="addAlert($event)"></delete-author>
       </td>
     </tr>
   </tbody>
