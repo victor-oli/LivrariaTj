@@ -89,7 +89,7 @@ namespace Tj.Livraria.Infra.Repositories
 
         public bool Update(Author entity)
         {
-            string query = "Update Autor (Nome) set (@Nome) where CodAu = @cod";
+            string query = "Update Autor set Nome = @Nome where CodAu = @cod";
 
             using (var conn = new SqlConnection(ConnectionString))
             {
