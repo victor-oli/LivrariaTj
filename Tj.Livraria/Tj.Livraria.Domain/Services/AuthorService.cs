@@ -70,7 +70,9 @@ namespace Tj.Livraria.Domain.Services
             if (originalAuthor == null)
                 throw new EntityNotFoundException($"Author not found, cod: {entity.AuthorCod}");
 
-            if (originalAuthor.AuthorCod != entity.AuthorCod)
+            var authorWithSameName = _repository.GetByName(entity.Name);
+
+            if (authorWithSameName != null && authorWithSameName.AuthorCod != originalAuthor.AuthorCod)
                 throw new AlreadyExistsException("Already exists an author with this name");
 
             return _repository.Update(entity);
