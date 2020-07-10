@@ -10,6 +10,7 @@ namespace Tj.Livraria.App.IoC
         {
             collection.AddScoped<ISubjectAppService, SubjectAppService>();
             collection.AddScoped<IAuthorAppService, AuthorAppService>();
+            collection.AddScoped<IBookAppService, BookAppService>();
         }
     }
 }
