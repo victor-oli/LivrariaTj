@@ -7,5 +7,6 @@ namespace Tj.Livraria.Domain.Interfaces.Repository
     {
         List<Book> GetAllBySubject(int subjectCod);
         List<Book> GetAllByAuthor(int authorCod);
+        Book GetByTitleAndEdition(string title, int edition);
     }
 }

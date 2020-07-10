@@ -19,6 +19,14 @@ namespace Tj.Livraria.Domain.Services
         {
             entity.IsValidToCreateOrUpdate();
 
+            entity.Title = entity.Title.ToLower();
+            entity.PublishingCompany = entity.PublishingCompany.ToLower();
+
+            var anotherBookWithSameTitleAndEdition = _repository.GetByTitleAndEdition(entity.Title, entity.Edition);
+
+            if (anotherBookWithSameTitleAndEdition != null)
+                throw new AlreadyExistsException("Already exists a book with this title and edition");
+
             return _repository.Add(entity);
         }
 
@@ -47,10 +55,18 @@ namespace Tj.Livraria.Domain.Services
         {
             entity.IsValidToCreateOrUpdate();
 
+            entity.Title = entity.Title.ToLower();
+            entity.PublishingCompany = entity.PublishingCompany.ToLower();
+
             var originalAuthor = _repository.Get(entity.BookCod);
 
             if (originalAuthor == null)
                 throw new EntityNotFoundException($"Book not found, cod: {entity.BookCod}");
+
+            var anotherBookWithSameTitleAndEdition = _repository.GetByTitleAndEdition(entity.Title, entity.Edition);
+
+            if (anotherBookWithSameTitleAndEdition != null)
+                throw new AlreadyExistsException("Already exists a book with this title and edition");
 
             return _repository.Update(entity);
         }

@@ -1,8 +1,10 @@
 ﻿using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using Tj.Livraria.Domain.Entities;
+using Tj.Livraria.Domain.Exceptions;
 using Tj.Livraria.Domain.Interfaces.Repository;
 using Tj.Livraria.Infra.Mapping;
 
@@ -34,47 +36,82 @@ namespace Tj.Livraria.Infra.Repositories
 
         public bool Delete(int cod)
         {
-            string query = "Delete from Livro where Codl = @cod";
+            string deleteSubjectRelationshipsQuery = "delete from Livro_Assunto where Livro_Codl = @cod";
+            string deleteAuthorRelationshipsQuery = "delete from Livro_Autor where Livro_Codl = @cod";
+            string deleteBookQuery = "Delete from Livro where Codl = @cod";
 
             using (var conn = new SqlConnection(_connectionString))
             {
-                return conn.Execute(query, new
+                conn.Open();
+
+                using (var transaction = conn.BeginTransaction())
                 {
-                    cod
-                }) == 1;
+                    try
+                    {
+                        conn.Execute(deleteSubjectRelationshipsQuery, new
+                        {
+                            cod
+                        }, transaction);
+
+                        conn.Execute(deleteAuthorRelationshipsQuery, new
+                        {
+                            cod
+                        }, transaction);
+
+                        int deleteBookAffectedRows = conn.Execute(deleteBookQuery, new
+                        {
+                            cod
+                        }, transaction);
+
+                        transaction.Commit();
+
+                        return deleteBookAffectedRows > 1;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+
+                        throw new RelationshipViolationException($"An error occurred while trying to delete any relationship associated with bookCod {cod}", ex);
+                    }
+                }
             }
         }
 
         public Book Get(int cod)
         {
-            string query = "Select Codl, Titulo, Editora, Edicao, AnoPublicacao, Valor from Livro where Codl = @cod";
+            string query = @"Select
+                                Codl BookCod,
+                                Titulo Title,
+                                Editora PublishingCompany,
+                                Edicao Edition,
+                                AnoPublicacao PublicationYear,
+                                Valor Price 
+                            from Livro where Codl = @cod";
 
             using (var conn = new SqlConnection(_connectionString))
             {
-                var book = conn.QueryFirstOrDefault<dynamic>(query, new
+                return conn.QueryFirstOrDefault<Book>(query, new
                 {
                     cod
                 });
-
-                return BookMapping.Map(book);
             }
         }
 
         public List<Book> GetAll()
         {
-            string query = "Select Codl, Titulo, Editora, Edicao, AnoPublicacao, Valor from Livro";
+            string query = @"Select
+                                Codl BookCod,
+                                Titulo Title,
+                                Editora PublishingCompany,
+                                Edicao Edition,
+                                AnoPublicacao PublicationYear,
+                                Valor Price 
+                            from Livro";
 
             using (var conn = new SqlConnection(_connectionString))
             {
-                var result = conn.Query<dynamic>(query)
+                return conn.Query<Book>(query)
                     .ToList();
-
-                List<Book> bookList = new List<Book>();
-
-                result.ForEach(x => 
-                    bookList.Add(BookMapping.Map(x)));
-
-                return bookList;
             }
         }
 
@@ -125,6 +162,24 @@ namespace Tj.Livraria.Infra.Repositories
                     bookList.Add(BookMapping.MapWithSubjectRelationship(x)));
 
                 return bookList;
+            }
+        }
+
+        public Book GetByTitleAndEdition(string title, int edition)
+        {
+            string query = @"Select Codl, Titulo, Editora, Edicao, AnoPublicacao, Valor 
+                                from Livro 
+                                where Titulo = @title and Edicao = @edition";
+
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                var book = conn.QueryFirstOrDefault<dynamic>(query, new
+                {
+                    title,
+                    edition
+                });
+
+                return BookMapping.Map(book);
             }
         }
 

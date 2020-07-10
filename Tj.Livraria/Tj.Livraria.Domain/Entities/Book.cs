@@ -31,6 +31,9 @@ namespace Tj.Livraria.Domain.Entities
 
             if (Price < 0)
                 throw new NullOrEmptyException("Price can't be null or empty");
+
+            if ((PublicationYear.Length != 4) || !int.TryParse(PublicationYear, out int tempYear))
+                throw new FormatException("PublicationYear need be a valid year number with 4 characters");
         }
     }
 }
