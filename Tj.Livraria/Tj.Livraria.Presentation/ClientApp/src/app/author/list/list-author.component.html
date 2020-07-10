@@ -18,7 +18,7 @@
     <tr *ngFor="let author of authors">
       <td>{{author.name | titlecase}}</td>
       <td class="text-right" style="width: 100px;">
-        <update-author [authorCod]="author.authorCod" [authorName]="author.name" (onUpdateEvent)="refresh()"></update-author>
+        <update-author [authorCod]="author.authorCod" [authorName]="author.name" (onUpdateEvent)="refresh()" (onAlertEvent)="addAlert($event)"></update-author>
       </td>
       <td class="text-right" style="width: 100px;">
         <delete-author [authorCod]="author.authorCod" [authorName]="author.name" (onDeleteEvent)="refresh()" (onAlertEvent)="addAlert($event)"></delete-author>
@@ -27,4 +27,4 @@
   </tbody>
 </table>
 
-<add-author (onAddEvent)="refresh()"></add-author>
+<add-author (onAddEvent)="refresh()" (onAlertEvent)="addAlert($event)"></add-author>

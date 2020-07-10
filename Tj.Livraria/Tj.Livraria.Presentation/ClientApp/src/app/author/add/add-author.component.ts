@@ -14,6 +14,7 @@ export class AddAuthorComponent {
   private modalRef: BsModalRef;
 
   @Output() public onAddEvent = new EventEmitter<any>();
+  @Output() private onAlertEvent = new EventEmitter<any>();
 
   constructor(private service: AuthorService, private modalService: BsModalService) { }
 
@@ -33,6 +34,7 @@ export class AddAuthorComponent {
           this.modalRef.hide();
           this.alertMessage = '';
           this.showAlert = false;
+          this.onAlertEvent.emit({ type: "success", message: this.name + " has been created" });
         },
         error => console.log(error)
       );

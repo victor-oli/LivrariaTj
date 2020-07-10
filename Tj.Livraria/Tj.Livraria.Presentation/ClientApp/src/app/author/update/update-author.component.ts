@@ -10,6 +10,7 @@ export class UpdateAuthorComponent implements OnInit {
   @Input() public authorCod: number;
   @Input() public authorName: string;
   @Output() public onUpdateEvent = new EventEmitter<any>();
+  @Output() private onAlertEvent = new EventEmitter<any>();
 
   private modalTitle: string;
   private errorAlert = false;
@@ -45,6 +46,7 @@ export class UpdateAuthorComponent implements OnInit {
           this.modalRef.hide();
           this.errorAlert = false;
           this.errorMessage = '';
+          this.onAlertEvent.emit({ type: "success", message: this.authorName + " has been updated" });
         },
         error => console.error("Internal server error")
       );
