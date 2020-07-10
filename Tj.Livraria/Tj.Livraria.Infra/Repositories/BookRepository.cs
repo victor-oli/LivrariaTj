@@ -130,10 +130,8 @@ namespace Tj.Livraria.Infra.Repositories
 
         public bool Update(Book entity)
         {
-            string query = @"Update Livro 
-                                (Titulo, Editora, Edicao, AnoPublicacao, Valor) 
-                            set 
-                                (@Titulo, @Editora, @Edicao, @AnoPublicacao, @Valor) 
+            string query = @"Update Livro set
+                                Titulo = @Titulo, Editora = @Editora, Edicao = @Edicao, AnoPublicacao = @AnoPublicacao, Valor = @Valor) 
                             where Codl = @cod";
 
             using (var conn = new SqlConnection(_connectionString))

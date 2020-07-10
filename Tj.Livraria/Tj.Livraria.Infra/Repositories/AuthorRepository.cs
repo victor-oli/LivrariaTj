@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -11,13 +10,13 @@ namespace Tj.Livraria.Infra.Repositories
 {
     public class AuthorRepository : IAuthorRepository
     {
-        private string ConnectionString = "Data Source=localhost;Initial Catalog=Livraria;Trusted_Connection=True;";
+        private string _connectionString = "Data Source=localhost;Initial Catalog=Livraria;Trusted_Connection=True;";
 
         public bool Add(Author entity)
         {
             string query = "Insert into Autor (Nome) values (@Nome)";
 
-            using (var conn = new SqlConnection(ConnectionString))
+            using (var conn = new SqlConnection(_connectionString))
             {
                 return conn.Execute(query, new
                 {
@@ -30,7 +29,7 @@ namespace Tj.Livraria.Infra.Repositories
         {
             string query = "Delete from Autor where CodAu = @cod";
 
-            using (var conn = new SqlConnection(ConnectionString))
+            using (var conn = new SqlConnection(_connectionString))
             {
                 return conn.Execute(query, new
                 {
@@ -43,7 +42,7 @@ namespace Tj.Livraria.Infra.Repositories
         {
             string query = "Select CodAu, Nome from Autor where CodAu = @cod";
 
-            using (var conn = new SqlConnection(ConnectionString))
+            using (var conn = new SqlConnection(_connectionString))
             {
                 var author = conn.QueryFirstOrDefault<dynamic>(query, new
                 {
@@ -58,7 +57,7 @@ namespace Tj.Livraria.Infra.Repositories
         {
             string query = "Select CodAu, Nome from Autor";
 
-            using (var conn = new SqlConnection(ConnectionString))
+            using (var conn = new SqlConnection(_connectionString))
             {
                 var result = conn.Query<dynamic>(query)
                     .ToList();
@@ -76,7 +75,7 @@ namespace Tj.Livraria.Infra.Repositories
         {
             string query = "Select CodAu, Nome from Autor where Nome = @name";
 
-            using (var conn = new SqlConnection(ConnectionString))
+            using (var conn = new SqlConnection(_connectionString))
             {
                 var author = conn.QueryFirstOrDefault<dynamic>(query, new
                 {
@@ -91,7 +90,7 @@ namespace Tj.Livraria.Infra.Repositories
         {
             string query = "Update Autor set Nome = @Nome where CodAu = @cod";
 
-            using (var conn = new SqlConnection(ConnectionString))
+            using (var conn = new SqlConnection(_connectionString))
             {
                 return conn.Execute(query, new
                 {
