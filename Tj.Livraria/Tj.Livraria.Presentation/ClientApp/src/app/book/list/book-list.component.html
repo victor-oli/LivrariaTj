@@ -1,12 +1,12 @@
-<h1 id="tableLabel">Lista de Assuntos</h1>
+<h1 id="tableLabel">Lista de Livros</h1>
 
-<p>Aqui você pode criar, editar e deletar os assuntos à vontade!</p>
+<p>Aqui você pode criar, editar e deletar os livros à vontade!</p>
 
 <p *ngIf="!books"><em>Loading...</em></p>
 
 <custom-alert *ngIf="alerts" [alerts]="alerts" (onRemoveAlert)="removeAlert($event)"></custom-alert>
 
-<table class="table">
+<table class="table table-striped" *ngIf="books">
   <thead class="thead-dark">
     <tr>
       <th>
@@ -45,10 +45,10 @@
       <td>
         {{book.publicationYear}}
       </td>
-      <td>
+      <td class="text-right" style="width: 100px;">
         Editar
       </td>
-      <td>
+      <td class="text-right" style="width: 100px;">
         Deletar
       </td>
     </tr>
