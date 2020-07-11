@@ -7,6 +7,9 @@ namespace Tj.Livraria.Infra.Mapping
     {
         public static Book Map(dynamic book)
         {
+            if (book == null)
+                return null;
+
             return new Book
             {
                 BookCod = book.Codl,
@@ -20,6 +23,9 @@ namespace Tj.Livraria.Infra.Mapping
 
         public static Book MapWithSubjectRelationship(dynamic book)
         {
+            if (book == null)
+                return null;
+
             Book bookEntity = Map(book);
 
             bookEntity.BookSubjects.Add(new Subject
@@ -33,6 +39,9 @@ namespace Tj.Livraria.Infra.Mapping
 
         public static Book MapWithAuthorRelationship(dynamic book)
         {
+            if (book == null)
+                return null;
+
             Book bookEntity = Map(book);
 
             bookEntity.BookAuthors.Add(new Author
