@@ -37,7 +37,7 @@
         {{book.edition}}
       </td>
       <td>
-        {{book.price | currency}}
+        {{book.price | currency:'BRL':'symbol':'1.2-2':'pt'}}
       </td>
       <td>
         {{book.publishingCompany | titlecase}}
@@ -54,3 +54,5 @@
     </tr>
   </tbody>
 </table>
+
+<add-book (onAddEvent)="refresh()" (onAlertEvent)="addAlert($event)"></add-book>

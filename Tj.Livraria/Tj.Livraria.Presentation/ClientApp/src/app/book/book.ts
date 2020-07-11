@@ -1,8 +1,8 @@
 export class Book {
-  public bookCod: number;
+  public bookCod: number = 0;
   public title: string;
   public publishingCompany: string;
-  public edition: number;
-  public publicationYear: number;
-  public price: number;
+  public edition: number = 0;
+  public publicationYear: string;
+  public price: number = 0;
 }
