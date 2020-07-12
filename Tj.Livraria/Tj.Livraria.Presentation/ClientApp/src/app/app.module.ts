@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AboutComponent } from './about/about.component';
@@ -18,6 +19,7 @@ import { ListAuthorComponent } from './author/list/list-author.component';
 import { UpdateAuthorComponent } from './author/update/update-author.component';
 import { AddBookComponent } from './book/add/add-book.component';
 import { BookService } from './book/book.service';
+import { DeleteBookComponent } from './book/delete/delete.book.component';
 import { BookListComponent } from './book/list/book-list.component';
 import { UpdateBookComponent } from './book/update/update-book.component';
 import { HomeComponent } from './home/home.component';
@@ -27,7 +29,6 @@ import { DeleteSubjectComponent } from './subject/delete/delete-subject.componen
 import { SubjectListComponent } from './subject/subject-list/subject-list.component';
 import { SubjectService } from './subject/subject.service';
 import { UpdateSubjectComponent } from './subject/update/update-subject.component';
-import { CurrencyMaskModule } from "ng2-currency-mask";
 registerLocaleData(localePt);
 
 @NgModule({
@@ -47,7 +48,8 @@ registerLocaleData(localePt);
     DeleteAuthorComponent,
     BookListComponent,
     AddBookComponent,
-    UpdateBookComponent
+    UpdateBookComponent,
+    DeleteBookComponent
   ],
   imports: [
     ModalModule.forRoot(),

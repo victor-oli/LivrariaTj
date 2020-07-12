@@ -49,7 +49,7 @@
         <update-book [book]="book" (onUpdateEvent)="refresh()" (onAlertEvent)="addAlert($event)"></update-book>
       </td>
       <td class="text-right" style="width: 100px;">
-        Deletar
+        <delete-book [book]="book" (onDeleteEvent)="refresh()" (onAlertEvent)="addAlert($event)"></delete-book>
       </td>
     </tr>
   </tbody>
