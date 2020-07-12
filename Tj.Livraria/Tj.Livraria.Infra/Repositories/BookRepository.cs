@@ -65,7 +65,7 @@ namespace Tj.Livraria.Infra.Repositories
 
                         transaction.Commit();
 
-                        return deleteBookAffectedRows > 1;
+                        return deleteBookAffectedRows > 0;
                     }
                     catch (Exception ex)
                     {
