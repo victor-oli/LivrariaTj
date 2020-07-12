@@ -1,0 +1,48 @@
+<button class="btn btn-primary" (click)="openModal(template)">Editar</button>
+
+<ng-template #template>
+  <alert type="danger" [hidden]="errorAlert==false">
+    <strong>ERROR! </strong>{{errorMessage}}
+  </alert>
+
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{modalTitle | titlecase}}</h4>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Titulo</label>
+          <input class="form-control" type="text" required [(ngModel)]="book.title" name="book.title" value="{{book.title}}" />
+        </div>
+
+        <div class="form-group">
+          <label>Edição</label>
+          <input class="form-control" type="number" [(ngModel)]="book.edition" name="book.edition" value="{{book.edition}}" required />
+        </div>
+
+        <div class="form-group">
+          <label>Preço</label>
+          <input class="form-control" currencyMask required maxlength="12" [(ngModel)]="book.price" name="book.price" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" />
+        </div>
+
+        <div class="form-group">
+          <label>Editora</label>
+          <input class="form-control" type="text" required [(ngModel)]="book.publishingCompany" name="book.publishingCompany" value="{{book.publishingCompany}}" />
+        </div>
+
+        <div class="form-group">
+          <label>Ano</label>
+          <input class="form-control" type="text" required [(ngModel)]="book.publicationYear" name="book.publicationYear" value="{{book.publicationYear}}" />
+        </div>
+
+        <div>
+          <button class="form-control btn btn-primary" type="submit">Salvar</button>
+        </div>
+      </form>
+    </div>
+</ng-template>

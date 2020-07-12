@@ -29,7 +29,7 @@ namespace Tj.Livraria.Domain.Entities
             if (string.IsNullOrWhiteSpace(PublicationYear))
                 throw new NullOrEmptyException("PublicationYear can't be null or empty");
 
-            if (Price < 1)
+            if (Price < .01m)
                 throw new NullOrEmptyException("Price can't be null or empty");
 
             if ((PublicationYear.Length != 4) || !int.TryParse(PublicationYear, out int tempYear))

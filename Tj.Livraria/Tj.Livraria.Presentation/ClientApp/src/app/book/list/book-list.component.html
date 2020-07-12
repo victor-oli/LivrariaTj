@@ -46,7 +46,7 @@
         {{book.publicationYear}}
       </td>
       <td class="text-right" style="width: 100px;">
-        Editar
+        <update-book [book]="book" (onUpdateEvent)="refresh()" (onAlertEvent)="addAlert($event)"></update-book>
       </td>
       <td class="text-right" style="width: 100px;">
         Deletar

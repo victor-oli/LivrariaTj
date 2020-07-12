@@ -1,4 +1,6 @@
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import localePt from '@angular/common/locales/pt';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +19,7 @@ import { UpdateAuthorComponent } from './author/update/update-author.component';
 import { AddBookComponent } from './book/add/add-book.component';
 import { BookService } from './book/book.service';
 import { BookListComponent } from './book/list/book-list.component';
+import { UpdateBookComponent } from './book/update/update-book.component';
 import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AddSubjectCompenent } from './subject/add/add-subject.component';
@@ -24,8 +27,7 @@ import { DeleteSubjectComponent } from './subject/delete/delete-subject.componen
 import { SubjectListComponent } from './subject/subject-list/subject-list.component';
 import { SubjectService } from './subject/subject.service';
 import { UpdateSubjectComponent } from './subject/update/update-subject.component';
-import { registerLocaleData } from '@angular/common';
-import localePt from '@angular/common/locales/pt';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 registerLocaleData(localePt);
 
 @NgModule({
@@ -44,11 +46,13 @@ registerLocaleData(localePt);
     UpdateAuthorComponent,
     DeleteAuthorComponent,
     BookListComponent,
-    AddBookComponent
+    AddBookComponent,
+    UpdateBookComponent
   ],
   imports: [
     ModalModule.forRoot(),
     AlertModule.forRoot(),
+    CurrencyMaskModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,

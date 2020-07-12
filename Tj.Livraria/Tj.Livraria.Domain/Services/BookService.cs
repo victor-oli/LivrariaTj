@@ -65,7 +65,7 @@ namespace Tj.Livraria.Domain.Services
 
             var anotherBookWithSameTitleAndEdition = _repository.GetByTitleAndEdition(entity.Title, entity.Edition);
 
-            if (anotherBookWithSameTitleAndEdition != null)
+            if (anotherBookWithSameTitleAndEdition != null && anotherBookWithSameTitleAndEdition.BookCod != entity.BookCod)
                 throw new AlreadyExistsException("Already exists a book with this title and edition");
 
             return _repository.Update(entity);

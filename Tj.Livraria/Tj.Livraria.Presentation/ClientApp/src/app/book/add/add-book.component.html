@@ -30,7 +30,7 @@
 
       <div class="form-group">
         <label>Preço</label>
-        <input class="form-control" type="number" required [(ngModel)]="book.price" name="book.price" value="{{book.price}}" />
+        <input class="form-control" currencyMask required maxlength="12" [(ngModel)]="book.price" name="book.price" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" />
       </div>
 
       <div class="form-group">

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, TemplateRef } from "@angular/core";
+import { Component, Output, EventEmitter, TemplateRef, OnInit } from "@angular/core";
 import { Book } from "../book";
 import { BookService } from "../book.service";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
@@ -7,7 +7,7 @@ import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
   selector: 'add-book',
   templateUrl: 'add-book.component.html'
 })
-export class AddBookComponent {
+export class AddBookComponent implements OnInit {
   private book = new Book();
   private showAlert: boolean = false;
   private alertMessage: string;
@@ -18,7 +18,18 @@ export class AddBookComponent {
 
   constructor(private service: BookService, private modalService: BsModalService) { }
 
+  ngOnInit(): void { }
+
+  validateBook() {
+    if (!this.book.edition)
+      this.book.edition = 0;
+
+    if (!this.book.price)
+      this.book.price = 0;
+  }
+
   onSubmit() {
+    this.validateBook();
     this.service
       .add(this.book)
       .subscribe(
