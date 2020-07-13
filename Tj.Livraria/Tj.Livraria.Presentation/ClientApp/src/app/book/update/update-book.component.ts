@@ -10,10 +10,11 @@ import { SubjectService } from "../../subject/subject.service";
   templateUrl: 'update-book.component.html'
 })
 export class UpdateBookComponent {
-  @Input() public book = new Book();
+  @Input() public originalBook: Book = new Book();
   @Output() public onUpdateEvent = new EventEmitter<any>();
   @Output() private onAlertEvent = new EventEmitter<any>();
 
+  private book: Book;
   private modalTitle: string;
   private errorAlert = false;
   private errorMessage: string;
@@ -25,6 +26,7 @@ export class UpdateBookComponent {
     private authorService: AuthorService, private subjectService: SubjectService) { }
 
   ngOnInit() {
+    this.book = Object.assign({}, this.originalBook);
     this.modalTitle = "Editar " + this.book.title;
 
     this.fillAuthorList();
@@ -138,9 +140,7 @@ export class UpdateBookComponent {
     this.validateBook();
     this.updateAuthorRelationship();
     this.onChangeCheckedSubject(this.subjectList.filter(s => s.isChecked));
-
-    console.log(this.book.subjects);
-
+    console.log(this.book);
     this.service
       .update(this.book)
       .subscribe(
