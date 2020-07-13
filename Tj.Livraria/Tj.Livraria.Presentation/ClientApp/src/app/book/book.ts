@@ -1,4 +1,5 @@
 import { Author } from "../author/author";
+import { Subject } from "../subject/subject";
 
 export class Book {
   public bookCod: number = 0;
@@ -9,4 +10,5 @@ export class Book {
   public price: number = 0;
 
   public authors: Author[] = [];
+  public subjects: Subject[] = [];
 }

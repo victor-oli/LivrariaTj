@@ -1,9 +1,9 @@
-import { Component, Output, EventEmitter, TemplateRef, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output, TemplateRef } from "@angular/core";
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
+import { AuthorService } from "../../author/author.service";
+import { SubjectService } from "../../subject/subject.service";
 import { Book } from "../book";
 import { BookService } from "../book.service";
-import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
-import { Author } from "../../author/author";
-import { AuthorService } from "../../author/author.service";
 
 @Component({
   selector: 'add-book',
@@ -15,14 +15,16 @@ export class AddBookComponent implements OnInit {
   private alertMessage: string;
   private modalRef: BsModalRef;
   private authorList: any[] = [];
+  private subjectList: any[] = [];
 
   @Output() public onAddEvent = new EventEmitter<any>();
   @Output() private onAlertEvent = new EventEmitter<any>();
 
-  constructor(private service: BookService, private modalService: BsModalService, private authorService: AuthorService) { }
+  constructor(private service: BookService, private modalService: BsModalService, private authorService: AuthorService, private subService: SubjectService) { }
 
   ngOnInit(): void {
     this.fillAuthorList();
+    this.fillSubjectList();
   }
 
   private fillAuthorList() {
@@ -37,6 +39,20 @@ export class AddBookComponent implements OnInit {
         },
         error => console.error("Internal server error")
     );
+  }
+
+  private fillSubjectList() {
+    this.subService.getSubjects()
+      .subscribe(
+        result => {
+          if (result)
+            result.forEach(s => this.subjectList.push({
+              cod: s.subjectCod,
+              text: s.description
+            }));
+        },
+        error => console.error("Internal server error")
+      );
   }
 
   validateBook() {
@@ -81,6 +97,15 @@ export class AddBookComponent implements OnInit {
     authorList.forEach(a => this.book.authors.push({
       authorCod: a.cod,
       name: a.text
+    }));
+  }
+
+  setCheckedSubjectList(subList: any[]) {
+    this.book.subjects = [];
+
+    subList.forEach(s => this.book.subjects.push({
+      subjectCod: s.cod,
+      description: s.text
     }));
   }
 }

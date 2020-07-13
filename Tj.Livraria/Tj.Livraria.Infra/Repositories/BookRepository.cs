@@ -23,6 +23,7 @@ namespace Tj.Livraria.Infra.Repositories
                                         (@Titulo, @Editora, @Edicao, @AnoPublicacao, @Valor)";
 
             string insertAuthorRelationshipQuery = @"insert into Livro_Autor values (@bookCod, @authorCod)";
+            string insertSubjectRelationshipQuery = @"insert into Livro_Assunto values (@bookCod, @subjectCod)";
 
             using (var conn = new SqlConnection(_connectionString))
             {
@@ -45,6 +46,12 @@ namespace Tj.Livraria.Infra.Repositories
                         {
                             bookCod,
                             authorCod = a.AuthorCod
+                        }, transaction));
+
+                        entity.Subjects.ForEach(s => conn.Execute(insertSubjectRelationshipQuery, new
+                        {
+                            bookCod,
+                            subjectCod = s.SubjectCod
                         }, transaction));
 
                         transaction.Commit();
