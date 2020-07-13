@@ -140,7 +140,8 @@ namespace Tj.Livraria.Infra.Repositories
                                 Edicao Edition,
                                 AnoPublicacao PublicationYear,
                                 Valor Price 
-                            from Livro";
+                            from Livro
+                            order by 2";
 
             using (var conn = new SqlConnection(_connectionString))
             {
@@ -155,7 +156,8 @@ namespace Tj.Livraria.Infra.Repositories
                                 from livro l
                                 inner join Livro_Autor la on la.Livro_Codl = l.Codl
                                 inner join Autor a on a.CodAu = la.Autor_CodAu
-                                where a.CodAu = @authorCod";
+                                where a.CodAu = @authorCod
+                                order by 2";
 
             using (var conn = new SqlConnection(_connectionString))
             {
@@ -181,7 +183,8 @@ namespace Tj.Livraria.Infra.Repositories
                                 join Livro_Assunto la on la.Livro_Codl = la.Livro_Codl
                                 inner
                                 join Assunto a on a.CodAs = la.Assunto_CodAs
-                                WHERE a.CodAs = @subjectCod";
+                                WHERE a.CodAs = @subjectCod
+                                order by 2";
 
             using (var conn = new SqlConnection(_connectionString))
             {

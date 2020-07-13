@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of itens">
-      <td>{{item.authorName}}</td>
+      <td>{{item.authorName | titlecase}}</td>
       <td class="text-center">{{item.bookCount}}</td>
       <td class="text-center">{{item.subjectCount}}</td>
     </tr>

@@ -87,7 +87,7 @@ namespace Tj.Livraria.Infra.Repositories
 
         public List<Author> GetAll()
         {
-            string query = "Select CodAu, Nome from Autor";
+            string query = "Select CodAu, Nome from Autor order by 2";
 
             using (var conn = new SqlConnection(_connectionString))
             {
@@ -109,7 +109,8 @@ namespace Tj.Livraria.Infra.Repositories
                                 from Autor a
                                 inner join Livro_Autor la on la.Autor_CodAu = a.CodAu
                                 inner join Livro l on l.Codl = la.Livro_Codl
-                                where l.Codl = @bookCod";
+                                where l.Codl = @bookCod
+                                order by 2";
 
             using (var conn = new SqlConnection(_connectionString))
             {

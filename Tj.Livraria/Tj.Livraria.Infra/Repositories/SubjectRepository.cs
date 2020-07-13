@@ -84,7 +84,7 @@ namespace Tj.Livraria.Infra.Repositories
 
         public List<Subject> GetAll()
         {
-            string query = "Select CodAs as SubjectCod, Descricao as Description from Assunto";
+            string query = "Select CodAs as SubjectCod, Descricao as Description from Assunto order by 2";
 
             using(var conn = new SqlConnection(_connectionString))
             {
@@ -99,7 +99,8 @@ namespace Tj.Livraria.Infra.Repositories
                                 from Assunto a
                                 inner join Livro_Assunto la on la.Assunto_CodAs = a.CodAs
                                 inner join Livro l on l.Codl = la.Livro_Codl
-                                where l.Codl = @bookCod";
+                                where l.Codl = @bookCod
+                                order by 2";
 
             using (var conn = new SqlConnection(_connectionString))
             {
