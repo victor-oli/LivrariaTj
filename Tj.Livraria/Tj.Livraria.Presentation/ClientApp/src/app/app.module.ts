@@ -30,6 +30,8 @@ import { SubjectListComponent } from './subject/subject-list/subject-list.compon
 import { SubjectService } from './subject/subject.service';
 import { UpdateSubjectComponent } from './subject/update/update-subject.component';
 import { SimpleCheckboxListComponent } from './simple-checkbox-list/simple-checkbox-list.component';
+import { ReportService } from './report/report-service';
+import { BooksBySubjectComponent } from './report/books-by-subject/books-by-subject.component';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -51,7 +53,8 @@ registerLocaleData(localePt);
     AddBookComponent,
     UpdateBookComponent,
     DeleteBookComponent,
-    SimpleCheckboxListComponent
+    SimpleCheckboxListComponent,
+    BooksBySubjectComponent
   ],
   imports: [
     ModalModule.forRoot(),
@@ -64,7 +67,8 @@ registerLocaleData(localePt);
   providers: [
     SubjectService,
     AuthorService,
-    BookService
+    BookService,
+    ReportService
   ],
   bootstrap: [AppComponent]
 })

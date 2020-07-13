@@ -11,6 +11,7 @@ namespace Tj.Livraria.App.IoC
             collection.AddScoped<ISubjectRepository, SubjectRepository>();
             collection.AddScoped<IAuthorRepository, AuthorRepository>();
             collection.AddScoped<IBookRepository, BookRepository>();
+            collection.AddScoped<IReportRepository, ReportRepository>();
         }
     }
 }

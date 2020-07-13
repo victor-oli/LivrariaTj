@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Tj.Livraria.App.AppServices;
+using Tj.Livraria.App.Interfaces;
 using Tj.Livraria.App.Interfacies;
 
 namespace Tj.Livraria.App.IoC
@@ -11,6 +12,7 @@ namespace Tj.Livraria.App.IoC
             collection.AddScoped<ISubjectAppService, SubjectAppService>();
             collection.AddScoped<IAuthorAppService, AuthorAppService>();
             collection.AddScoped<IBookAppService, BookAppService>();
+            collection.AddScoped<IReportAppService, ReportAppService>();
         }
     }
 }
