@@ -22,16 +22,16 @@ export class BookService {
 
   add(book: Book): Observable<ResponseBase> {
     return this.http
-      .post<ResponseBase>(this.serviceUrl + "/api/book", book);
+      .post<ResponseBase>(this.serviceUrl + "/api/book/add", book);
   }
 
   update(book: Book): Observable<ResponseBase> {
     return this.http
-      .put<ResponseBase>(this.serviceUrl + "/api/book", book);
+      .put<ResponseBase>(this.serviceUrl + "/api/book/update", book);
   }
 
   delete(bookCod: number): Observable<ResponseBase> {
     return this.http
-      .delete<ResponseBase>(this.serviceUrl + "/api/book?bookCod=" + bookCod);
+      .delete<ResponseBase>(this.serviceUrl + "/api/book/delete?bookCod=" + bookCod);
   }
 }
