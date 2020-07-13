@@ -13,8 +13,6 @@ export class SubjectsAndBooksByAuthorComponent implements OnInit {
 
   ngOnInit() {
     this.getReport();
-
-    console.log(this.itens);
   }
 
   getReport() {
