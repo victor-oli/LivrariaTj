@@ -4,6 +4,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using Tj.Livraria.Domain.Entities;
 using Tj.Livraria.Domain.Interfaces.Repository;
+using Tj.Livraria.Infra.ObjectValues;
+using Z.Dapper.Plus;
 
 namespace Tj.Livraria.Infra.Repositories
 {
@@ -24,6 +26,20 @@ namespace Tj.Livraria.Infra.Repositories
             }
         }
 
+        public void AddManyRelations(int bookCod, List<Subject> subjects)
+        {
+            DapperPlusManager.Entity<BookSubject>().Table("Livro_Assunto");
+
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.BulkInsert(subjects.Select(x => new BookSubject
+                {
+                    Livro_Codl = bookCod,
+                    Assunto_CodAs = x.SubjectCod
+                }));
+            }
+        }
+
         public bool Delete(int cod)
         {
             string query = "Delete from Assunto where CodAs = @cod";
@@ -34,6 +50,22 @@ namespace Tj.Livraria.Infra.Repositories
                 {
                     cod
                 }) == 1;
+            }
+        }
+
+        public void DeleteManyRelations(int bookCod, List<Subject> subjects)
+        {
+            DapperPlusManager.Entity<BookSubject>().Table("Livro_Assunto")
+                .Key("Livro_Codl")
+                .Key("Assunto_CodAs");
+
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                var r = conn.BulkDelete(subjects.Select(x => new BookSubject
+                {
+                    Livro_Codl = bookCod,
+                    Assunto_CodAs = x.SubjectCod
+                }));
             }
         }
 

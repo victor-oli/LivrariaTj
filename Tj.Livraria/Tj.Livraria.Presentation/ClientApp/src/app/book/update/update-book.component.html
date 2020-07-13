@@ -14,40 +14,45 @@
   </div>
 
   <div class="modal-body">
-      <form (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label>Titulo</label>
-          <input class="form-control" type="text" required [(ngModel)]="book.title" name="book.title" value="{{book.title}}" />
-        </div>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Titulo</label>
+        <input class="form-control" type="text" required [(ngModel)]="book.title" name="book.title" value="{{book.title}}" />
+      </div>
 
-        <div class="form-group">
-          <label>Edição</label>
-          <input class="form-control" type="number" [(ngModel)]="book.edition" name="book.edition" value="{{book.edition}}" required />
-        </div>
+      <div class="form-group">
+        <label>Edição</label>
+        <input class="form-control" type="number" [(ngModel)]="book.edition" name="book.edition" value="{{book.edition}}" required />
+      </div>
 
-        <div class="form-group">
-          <label>Preço</label>
-          <input class="form-control" currencyMask required maxlength="12" [(ngModel)]="book.price" name="book.price" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" />
-        </div>
+      <div class="form-group">
+        <label>Preço</label>
+        <input class="form-control" currencyMask required maxlength="12" [(ngModel)]="book.price" name="book.price" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" />
+      </div>
 
-        <div class="form-group">
-          <label>Editora</label>
-          <input class="form-control" type="text" required [(ngModel)]="book.publishingCompany" name="book.publishingCompany" value="{{book.publishingCompany}}" />
-        </div>
+      <div class="form-group">
+        <label>Editora</label>
+        <input class="form-control" type="text" required [(ngModel)]="book.publishingCompany" name="book.publishingCompany" value="{{book.publishingCompany}}" />
+      </div>
 
-        <div class="form-group">
-          <label>Ano</label>
-          <input class="form-control" type="text" required [(ngModel)]="book.publicationYear" name="book.publicationYear" value="{{book.publicationYear}}" />
-        </div>
+      <div class="form-group">
+        <label>Ano</label>
+        <input class="form-control" type="text" required [(ngModel)]="book.publicationYear" name="book.publicationYear" value="{{book.publicationYear}}" />
+      </div>
 
-        <div class="form-group">
-          <label>Autor</label>
-          <simple-checkbox-list [itemList]="authorList" (onChangeCheckedList)="onChangeCheckedAuthor($event)"></simple-checkbox-list>
-        </div>
+      <div class="form-group">
+        <label>Autor</label>
+        <simple-checkbox-list [itemList]="authorList" (onChangeCheckedList)="onChangeCheckedAuthor($event)"></simple-checkbox-list>
+      </div>
 
-        <div>
-          <button class="form-control btn btn-primary" type="submit">Salvar</button>
-        </div>
-      </form>
+      <div class="form-group">
+        <label>Autor</label>
+        <simple-checkbox-list [itemList]="subjectList" (onChangeCheckedList)="onChangeCheckedSubject($event)"></simple-checkbox-list>
+      </div>
+
+      <div>
+        <button class="form-control btn btn-primary" type="submit">Salvar</button>
+      </div>
+    </form>
     </div>
 </ng-template>

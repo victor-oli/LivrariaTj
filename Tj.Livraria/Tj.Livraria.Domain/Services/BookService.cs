@@ -79,7 +79,7 @@ namespace Tj.Livraria.Domain.Services
             entity.Title = entity.Title.ToLower();
             entity.PublishingCompany = entity.PublishingCompany.ToLower();
 
-            var originalAuthor = Get(entity.BookCod, true, false);
+            var originalAuthor = Get(entity.BookCod, true, true);
 
             if (originalAuthor == null)
                 throw new EntityNotFoundException($"Book not found, cod: {entity.BookCod}");
@@ -90,6 +90,7 @@ namespace Tj.Livraria.Domain.Services
                 throw new AlreadyExistsException("Already exists a book with this title and edition");
 
             UpdateAuthorRelationship(originalAuthor.BookCod, entity.Authors, originalAuthor.Authors);
+            UpdateSubjectRelationship(originalAuthor.BookCod, entity.Subjects, originalAuthor.Subjects);
 
             return _repository.Update(entity);
         }
@@ -114,6 +115,28 @@ namespace Tj.Livraria.Domain.Services
 
             if (authorsToRemove.Any())
                 _authorRepository.DeleteManyRelations(bookCod, authorsToRemove);
+        }
+
+        private void UpdateSubjectRelationship(int bookCod, List<Subject> newSubjects, List<Subject> oldSubjects)
+        {
+            if (bookCod <= 0)
+                return;
+
+            List<Subject> subsToAdd = newSubjects
+                .Where(o => !oldSubjects
+                    .Any(n => n.SubjectCod == o.SubjectCod))
+                .ToList();
+
+            if (subsToAdd.Any())
+                _subjectRepository.AddManyRelations(bookCod, subsToAdd);
+
+            List<Subject> subsToDelete = oldSubjects
+                .Where(o => !newSubjects
+                    .Any(n => n.SubjectCod == o.SubjectCod))
+                .ToList();
+
+            if (subsToDelete.Any())
+                _subjectRepository.DeleteManyRelations(bookCod, subsToDelete);
         }
     }
 }

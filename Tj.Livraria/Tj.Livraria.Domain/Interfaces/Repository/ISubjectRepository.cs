@@ -7,5 +7,7 @@ namespace Tj.Livraria.Domain.Interfaces.Repository
     {
         Subject GetByDescription(string description);
         List<Subject> GetAllByBookCod(int bookCod);
+        void AddManyRelations(int bookCod, List<Subject> subjects);
+        void DeleteManyRelations(int bookCod, List<Subject> subjects);
     }
 }

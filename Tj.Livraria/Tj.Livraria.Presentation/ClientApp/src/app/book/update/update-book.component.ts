@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { AuthorService } from "../../author/author.service";
 import { Book } from "../book";
 import { BookService } from "../book.service";
+import { SubjectService } from "../../subject/subject.service";
 
 @Component({
   selector: 'update-book',
@@ -18,13 +19,16 @@ export class UpdateBookComponent {
   private errorMessage: string;
   private modalRef: BsModalRef;
   private authorList: any[] = [];
+  private subjectList: any[] = [];
 
-  constructor(private service: BookService, private modalService: BsModalService, private authorService: AuthorService) { }
+  constructor(private service: BookService, private modalService: BsModalService,
+    private authorService: AuthorService, private subjectService: SubjectService) { }
 
   ngOnInit() {
     this.modalTitle = "Editar " + this.book.title;
 
     this.fillAuthorList();
+    this.fillSubjectList();
   }
 
   fillAuthorList() {
@@ -43,14 +47,35 @@ export class UpdateBookComponent {
     );
   }
 
+  fillSubjectList() {
+    this.subjectService.getSubjects()
+      .subscribe(
+        result => {
+          result.forEach(s => this.subjectList.push({
+            cod: s.subjectCod,
+            text: s.description,
+            isChecked: false
+          }));
+        },
+        error => console.error("Internal server error")
+      );
+  }
+
   checkRelatedAuthors() {
-    this.service.getWithRelationship(this.book.bookCod, true, false)
+    this.service.getWithRelationship(this.book.bookCod, true, true)
       .subscribe(
         result => {
           this.authorList.forEach(i => {
             let author = result.authors.filter(a => a.authorCod == i.cod)[0];
 
             if (author)
+              i.isChecked = true;
+          });
+
+          this.subjectList.forEach(i => {
+            let subject = result.subjects.filter(s => s.subjectCod == i.cod)[0];
+
+            if (subject)
               i.isChecked = true;
           });
         },
@@ -97,12 +122,24 @@ export class UpdateBookComponent {
     }));
   }
 
+  onChangeCheckedSubject(newCheckedList: any[]) {
+    this.book.subjects = [];
+
+    if (!newCheckedList)
+      return;
+
+    newCheckedList.forEach(s => this.book.subjects.push({
+      subjectCod: s.cod,
+      description: s.text
+    }));
+  }
+
   onSubmit() {
     this.validateBook();
     this.updateAuthorRelationship();
+    this.onChangeCheckedSubject(this.subjectList.filter(s => s.isChecked));
 
-    console.log(this.book.authors);
-    console.log(this.authorList);
+    console.log(this.book.subjects);
 
     this.service
       .update(this.book)
