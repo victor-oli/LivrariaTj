@@ -19,7 +19,7 @@ import { ListAuthorComponent } from './author/list/list-author.component';
 import { UpdateAuthorComponent } from './author/update/update-author.component';
 import { AddBookComponent } from './book/add/add-book.component';
 import { BookService } from './book/book.service';
-import { DeleteBookComponent } from './book/delete/delete.book.component';
+import { DeleteBookComponent } from './book/delete/delete-book.component';
 import { BookListComponent } from './book/list/book-list.component';
 import { UpdateBookComponent } from './book/update/update-book.component';
 import { HomeComponent } from './home/home.component';
@@ -29,6 +29,7 @@ import { DeleteSubjectComponent } from './subject/delete/delete-subject.componen
 import { SubjectListComponent } from './subject/subject-list/subject-list.component';
 import { SubjectService } from './subject/subject.service';
 import { UpdateSubjectComponent } from './subject/update/update-subject.component';
+import { AuthorFilterComponent } from './book/author-filter/author-filter.component';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -49,7 +50,8 @@ registerLocaleData(localePt);
     BookListComponent,
     AddBookComponent,
     UpdateBookComponent,
-    DeleteBookComponent
+    DeleteBookComponent,
+    AuthorFilterComponent
   ],
   imports: [
     ModalModule.forRoot(),

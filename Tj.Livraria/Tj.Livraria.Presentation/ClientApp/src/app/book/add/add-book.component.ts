@@ -2,6 +2,8 @@ import { Component, Output, EventEmitter, TemplateRef, OnInit } from "@angular/c
 import { Book } from "../book";
 import { BookService } from "../book.service";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
+import { Author } from "../../author/author";
+import { AuthorService } from "../../author/author.service";
 
 @Component({
   selector: 'add-book',
@@ -12,13 +14,30 @@ export class AddBookComponent implements OnInit {
   private showAlert: boolean = false;
   private alertMessage: string;
   private modalRef: BsModalRef;
+  private authorList: any[] = [];
 
   @Output() public onAddEvent = new EventEmitter<any>();
   @Output() private onAlertEvent = new EventEmitter<any>();
 
-  constructor(private service: BookService, private modalService: BsModalService) { }
+  constructor(private service: BookService, private modalService: BsModalService, private authorService: AuthorService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.fillAuthorList();
+  }
+
+  private fillAuthorList() {
+    this.authorService.getAll()
+      .subscribe(
+        result => {
+          if (result)
+            result.forEach(a => this.authorList.push({
+              cod: a.authorCod,
+              text: a.name
+            }));
+        },
+        error => console.error("Internal server error")
+    );
+  }
 
   validateBook() {
     if (!this.book.edition)
@@ -30,6 +49,7 @@ export class AddBookComponent implements OnInit {
 
   onSubmit() {
     this.validateBook();
+
     this.service
       .add(this.book)
       .subscribe(
@@ -53,5 +73,14 @@ export class AddBookComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+  setCheckedAuthorList(authorList: any[]) {
+    this.book.authors = [];
+
+    authorList.forEach(a => this.book.authors.push({
+      authorCod: a.cod,
+      name: a.text
+    }));
   }
 }

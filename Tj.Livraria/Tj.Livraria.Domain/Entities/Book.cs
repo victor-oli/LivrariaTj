@@ -12,8 +12,8 @@ namespace Tj.Livraria.Domain.Entities
         public string PublicationYear { get; set; }
         public decimal Price { get; set; }
 
-        public List<Author> BookAuthors { get; set; } = new List<Author>();
-        public List<Subject> BookSubjects { get; set; } = new List<Subject>();
+        public List<Author> Authors { get; set; } = new List<Author>();
+        public List<Subject> Subjects { get; set; } = new List<Subject>();
 
         public void IsValidToCreateOrUpdate()
         {

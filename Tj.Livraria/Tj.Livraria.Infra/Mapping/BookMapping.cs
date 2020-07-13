@@ -28,7 +28,7 @@ namespace Tj.Livraria.Infra.Mapping
 
             Book bookEntity = Map(book);
 
-            bookEntity.BookSubjects.Add(new Subject
+            bookEntity.Subjects.Add(new Subject
             {
                 SubjectCod = book.CodAs,
                 Description = book.AssuntoDescricao
@@ -44,7 +44,7 @@ namespace Tj.Livraria.Infra.Mapping
 
             Book bookEntity = Map(book);
 
-            bookEntity.BookAuthors.Add(new Author
+            bookEntity.Authors.Add(new Author
             {
                 AuthorCod = book.CodAu,
                 Name = book.AuthorName

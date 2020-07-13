@@ -1,0 +1,12 @@
+<input type="text" class="form-control" placeholder="digite o nome do autor" (keyup)="search($event)" />
+
+<div style="margin-top: 10px;">
+  <div *ngFor="let item of filteredItens" class="input-group mb-3">
+    <span class="form-control">{{item.text | titlecase}}</span>
+    <div class="input-group-append">
+      <div class="input-group-text outline-danger">
+        <input type="checkbox" (click)="onSelectItem(item.text)" [checked]="item.isChecked" />
+      </div>
+    </div>
+  </div>
+</div>

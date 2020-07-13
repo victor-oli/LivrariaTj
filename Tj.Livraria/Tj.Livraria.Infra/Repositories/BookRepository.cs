@@ -16,21 +16,48 @@ namespace Tj.Livraria.Infra.Repositories
 
         public bool Add(Book entity)
         {
-            string query = @"Insert into Livro 
-                                (Titulo, Editora, Edicao, AnoPublicacao, Valor) 
-                             values 
-                                (@Titulo, @Editora, @Edicao, @AnoPublicacao, @Valor)";
+            string insertBookQuery = @"Insert into Livro
+                                        (Titulo, Editora, Edicao, AnoPublicacao, Valor) 
+                                       output inserted.Codl
+                                       values
+                                        (@Titulo, @Editora, @Edicao, @AnoPublicacao, @Valor)";
+
+            string insertAuthorRelationshipQuery = @"insert into Livro_Autor values (@bookCod, @authorCod)";
 
             using (var conn = new SqlConnection(_connectionString))
             {
-                return conn.Execute(query, new
+                conn.Open();
+
+                using (var transaction = conn.BeginTransaction())
                 {
-                    Titulo = entity.Title,
-                    Editora = entity.PublishingCompany,
-                    Edicao = entity.Edition,
-                    AnoPublicacao = entity.PublicationYear,
-                    Valor = entity.Price
-                }) == 1;
+                    try
+                    {
+                        int bookCod = conn.ExecuteScalar<int>(insertBookQuery, new
+                        {
+                            Titulo = entity.Title,
+                            Editora = entity.PublishingCompany,
+                            Edicao = entity.Edition,
+                            AnoPublicacao = entity.PublicationYear,
+                            Valor = entity.Price
+                        }, transaction);
+
+                        entity.Authors.ForEach(a => conn.Execute(insertAuthorRelationshipQuery, new
+                        {
+                            bookCod,
+                            authorCod = a.AuthorCod
+                        }, transaction));
+
+                        transaction.Commit();
+
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+
+                        throw ex;
+                    }
+                }
             }
         }
 
