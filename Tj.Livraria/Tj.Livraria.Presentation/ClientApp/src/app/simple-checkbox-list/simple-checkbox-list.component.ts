@@ -1,11 +1,10 @@
-import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
-import { AuthorService } from "../../author/author.service";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-  selector: 'author-filter',
-  templateUrl: 'author-filter.component.html'
+  selector: 'simple-checkbox-list',
+  templateUrl: 'simple-checkbox-list.component.html'
 })
-export class AuthorFilterComponent {
+export class SimpleCheckboxListComponent {
   @Input() itemList: any[] = [];
   private filteredItens: Item[] = [];
   @Output() onChangeCheckedList = new EventEmitter<any>();
