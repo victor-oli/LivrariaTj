@@ -23,5 +23,10 @@ namespace Tj.Livraria.App.AppServices
         {
             return _service.GetBooksBySubject();
         }
+
+        public List<SubjectAndBookByAuthor> GetSubjectsAndBooksByAuthor()
+        {
+            return _service.GetSubjectsAndBooksByAuthor();
+        }
     }
 }

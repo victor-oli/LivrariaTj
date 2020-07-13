@@ -40,5 +40,17 @@ namespace Tj.Livraria.Presentation.Controllers
                 throw ex;
             }
         }
+
+        public List<SubjectAndBookByAuthor> GetSubjectsAndBooksByAuthor()
+        {
+            try
+            {
+                return _appService.GetSubjectsAndBooksByAuthor();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

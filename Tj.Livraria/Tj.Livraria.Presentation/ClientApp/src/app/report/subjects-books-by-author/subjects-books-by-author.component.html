@@ -1,0 +1,19 @@
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th colspan="3" class="text-center">Livros e Assuntos por Autor</th>
+    </tr>
+    <tr>
+      <th>Autores</th>
+      <th class="text-center">Qntd. Livros</th>
+      <th class="text-center">Qntd. Assuntos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of itens">
+      <td>{{item.authorName}}</td>
+      <td class="text-center">{{item.bookCount}}</td>
+      <td class="text-center">{{item.subjectCount}}</td>
+    </tr>
+  </tbody>
+</table>

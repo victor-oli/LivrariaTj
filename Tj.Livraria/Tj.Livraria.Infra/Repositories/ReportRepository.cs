@@ -58,5 +58,28 @@ namespace Tj.Livraria.Infra.Repositories
                     .ToList();
             }
         }
+
+        public List<SubjectAndBookByAuthor> GetSubjectsAndBooksByAuthor()
+        {
+            string createOrReplaceViewQuery = @"create or alter VIEW assuntos_livros_por_autor as
+                                                select a.nome AutorNome, count(lau.Livro_Codl) QntdLivros, count(las.Assunto_CodAs) QntdAssuntos
+                                                from autor a
+                                                left join Livro_Autor lau on lau.Autor_CodAu = a.CodAu
+                                                left join Livro_Assunto las on las.Livro_Codl = lau.Livro_Codl
+                                                left join Assunto ass on ass.CodAs = las.Assunto_CodAs
+                                                group by a.Nome";
+
+            string query = @"select AutorNome AuthorName, QntdLivros BookCount, QntdAssuntos SubjectCount
+                            from assuntos_livros_por_autor
+                            order by 1 asc, 2 desc, 3 desc";
+
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Execute(createOrReplaceViewQuery);
+
+                return conn.Query<SubjectAndBookByAuthor>(query)
+                    .ToList();
+            }
+        }
     }
 }

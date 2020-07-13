@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { BooksBySubject } from "./books-by-subject";
+import { BooksBySubject } from "./books-by-subject/books-by-subject";
 import { AuthorsBySubject } from "./authors-by-subject/authors-by-subject";
+import { SubjectsAndBooksByAuthor } from "./subjects-books-by-author/subjects-books-by-author";
 
 @Injectable()
 export class ReportService {
@@ -18,5 +19,10 @@ export class ReportService {
   getAuthorsBySubject(): Observable<AuthorsBySubject[]> {
     return this.http
       .get<AuthorsBySubject[]>(this.serviceUrl + "/api/report/GetAuthorsBySubject");
+  }
+
+  getSubjectsAndBooksByAuthor(): Observable<SubjectsAndBooksByAuthor[]> {
+    return this.http
+      .get<SubjectsAndBooksByAuthor[]>(this.serviceUrl + "/api/report/GetSubjectsAndBooksByAuthor");
   }
 }

@@ -7,5 +7,6 @@ namespace Tj.Livraria.App.Interfaces
     {
         List<BooksBySubject> GetBooksBySubject();
         List<AuthorsBySubject> GetAuthorsBySubject();
+        List<SubjectAndBookByAuthor> GetSubjectsAndBooksByAuthor();
     }
 }
