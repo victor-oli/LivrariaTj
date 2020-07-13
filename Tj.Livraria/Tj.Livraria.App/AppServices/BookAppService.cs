@@ -29,6 +29,11 @@ namespace Tj.Livraria.App.AppServices
             return _service.Get(cod);
         }
 
+        public Book Get(int bookCod, bool addAuthorRelationship, bool addSubjectRelationship)
+        {
+            return _service.Get(bookCod, addAuthorRelationship, addSubjectRelationship);
+        }
+
         public List<Book> GetAll()
         {
             return _service.GetAll();

@@ -8,7 +8,7 @@ using Tj.Livraria.Domain.Exceptions;
 
 namespace Tj.Livraria.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class BookController : ControllerBase
     {
@@ -32,12 +32,12 @@ namespace Tj.Livraria.Presentation.Controllers
             }
         }
 
-        [HttpGet, Route("/book/{bookCod}")]
-        public Book Get(int bookCod)
+        [HttpGet]
+        public Book Get(int cod)
         {
             try
             {
-                return _appService.Get(bookCod);
+                return _appService.Get(cod);
             }
             catch (Exception ex)
             {
@@ -106,6 +106,19 @@ namespace Tj.Livraria.Presentation.Controllers
             }
 
             return response;
+        }
+
+        [HttpGet]
+        public Book GetWithRelationship(int bookCod, bool addAuthor = false, bool addSubject = false)
+        {
+            try
+            {
+                return _appService.Get(bookCod, addAuthor, addSubject);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -71,6 +71,30 @@ namespace Tj.Livraria.Infra.Repositories
             }
         }
 
+        public List<Author> GetAllByBookCod(int bookCod)
+        {
+            string query = @"Select a.CodAu, a.Nome
+                                from Autor a
+                                inner join Livro_Autor la on la.Autor_CodAu = a.CodAu
+                                inner join Livro l on l.Codl = la.Livro_Codl
+                                where l.Codl = @bookCod";
+
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                var result = conn.Query<dynamic>(query, new
+                {
+                    bookCod
+                }).ToList();
+
+                List<Author> authorList = new List<Author>();
+
+                result.ForEach(x =>
+                    authorList.Add(AuthorMapping.Map(x)));
+
+                return authorList;
+            }
+        }
+
         public Author GetByName(string name)
         {
             string query = "Select CodAu, Nome from Autor where Nome = @name";

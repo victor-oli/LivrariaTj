@@ -9,10 +9,12 @@ namespace Tj.Livraria.Domain.Services
     public class BookService : IBookService
     {
         private IBookRepository _repository;
+        private IAuthorRepository _authorRepository;
 
-        public BookService(IBookRepository repository)
+        public BookService(IBookRepository repository, IAuthorRepository authorRepository)
         {
             _repository = repository;
+            _authorRepository = authorRepository;
         }
 
         public bool Add(Book entity)
@@ -44,6 +46,18 @@ namespace Tj.Livraria.Domain.Services
                 throw new NullOrEmptyException("You need send a valid book cod");
 
             return _repository.Get(cod);
+        }
+
+        public Book Get(int bookCod, bool addAuthorRelationship, bool addSubjectRelationship)
+        {
+            Book book = Get(bookCod);
+
+            if(book != null && addAuthorRelationship)
+            {
+                book.Authors = _authorRepository.GetAllByBookCod(book.BookCod);
+            }
+
+            return book;
         }
 
         public List<Book> GetAll()

@@ -12,12 +12,12 @@ export class BookService {
 
   getAll(): Observable<Book[]> {
     return this.http
-      .get<Book[]>(this.serviceUrl + "/api/book");
+      .get<Book[]>(this.serviceUrl + "/api/book/GetAll");
   }
 
   get(bookCod: number): Observable<Book> {
     return this.http
-      .get<Book>(this.serviceUrl + "/api/book?bookCod=" + bookCod);
+      .get<Book>(this.serviceUrl + "/api/book/Get?cod=" + bookCod);
   }
 
   add(book: Book): Observable<ResponseBase> {
