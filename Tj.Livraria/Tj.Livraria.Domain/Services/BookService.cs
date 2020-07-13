@@ -10,11 +10,13 @@ namespace Tj.Livraria.Domain.Services
     {
         private IBookRepository _repository;
         private IAuthorRepository _authorRepository;
+        private ISubjectRepository _subjectRepository;
 
-        public BookService(IBookRepository repository, IAuthorRepository authorRepository)
+        public BookService(IBookRepository repository, IAuthorRepository authorRepository, ISubjectRepository subjectRepository)
         {
             _repository = repository;
             _authorRepository = authorRepository;
+            _subjectRepository = subjectRepository;
         }
 
         public bool Add(Book entity)
@@ -52,9 +54,13 @@ namespace Tj.Livraria.Domain.Services
         {
             Book book = Get(bookCod);
 
-            if(book != null && addAuthorRelationship)
+            if (book != null)
             {
-                book.Authors = _authorRepository.GetAllByBookCod(book.BookCod);
+                if (addAuthorRelationship)
+                    book.Authors = _authorRepository.GetAllByBookCod(book.BookCod);
+
+                if (addSubjectRelationship)
+                    book.Subjects = _subjectRepository.GetAllByBookCod(book.BookCod);
             }
 
             return book;
