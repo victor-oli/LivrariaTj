@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -9,7 +10,12 @@ namespace Tj.Livraria.Infra.Repositories
 {
     public class ReportRepository : IReportRepository
     {
-        private string _connectionString = "Data Source=localhost;Initial Catalog=Livraria;Trusted_Connection=True;";
+        private string _connectionString;
+
+        public ReportRepository(IConfiguration config)
+        {
+            _connectionString = config.GetSection("Connectionstring").Value;
+        }
 
         public List<AuthorsBySubject> GetAuthorsBySubject()
         {
