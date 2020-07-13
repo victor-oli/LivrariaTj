@@ -5,6 +5,8 @@ using System.Linq;
 using Tj.Livraria.Domain.Entities;
 using Tj.Livraria.Domain.Interfaces.Repository;
 using Tj.Livraria.Infra.Mapping;
+using Tj.Livraria.Infra.ObjectValues;
+using Z.Dapper.Plus;
 
 namespace Tj.Livraria.Infra.Repositories
 {
@@ -25,6 +27,20 @@ namespace Tj.Livraria.Infra.Repositories
             }
         }
 
+        public void AddManyRelations(int bookCod, List<Author> authors)
+        {
+            DapperPlusManager.Entity<BookAuthor>().Table("Livro_Autor");
+
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                var r = conn.BulkInsert(authors.Select(x => new BookAuthor
+                {
+                    Livro_Codl = bookCod,
+                    Autor_CodAu = x.AuthorCod
+                }));
+            }
+        }
+
         public bool Delete(int cod)
         {
             string query = "Delete from Autor where CodAu = @cod";
@@ -35,6 +51,22 @@ namespace Tj.Livraria.Infra.Repositories
                 {
                     cod
                 }) == 1;
+            }
+        }
+
+        public void DeleteManyRelations(int bookCod, List<Author> authors)
+        {
+            DapperPlusManager.Entity<BookAuthor>().Table("Livro_Autor")
+                .Key("Livro_Codl")
+                .Key("Autor_CodAu");
+
+            using (var conn = new SqlConnection(_connectionString))
+            {
+                var r = conn.BulkDelete(authors.Select(x => new BookAuthor
+                {
+                    Livro_Codl = bookCod,
+                    Autor_CodAu = x.AuthorCod
+                }));
             }
         }
 

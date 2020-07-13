@@ -30,19 +30,19 @@
   </thead>
   <tbody>
     <tr *ngFor="let book of books">
-      <td>
+      <td class="align-middle">
         {{book.title | titlecase}}
       </td>
-      <td>
+      <td class="align-middle">
         {{book.edition}}
       </td>
-      <td>
+      <td class="align-middle">
         {{book.price | currency:'BRL':'symbol':'1.2-2':'pt'}}
       </td>
-      <td>
+      <td class="align-middle">
         {{book.publishingCompany | titlecase}}
       </td>
-      <td>
+      <td class="align-middle">
         {{book.publicationYear}}
       </td>
       <td class="text-right" style="width: 100px;">

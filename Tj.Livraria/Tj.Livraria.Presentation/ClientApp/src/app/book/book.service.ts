@@ -34,4 +34,9 @@ export class BookService {
     return this.http
       .delete<ResponseBase>(this.serviceUrl + "/api/book/delete?bookCod=" + bookCod);
   }
+
+  getWithRelationship(bookCod: number, addAuthor: boolean, addSubject: boolean): Observable<Book> {
+    return this.http
+      .get<Book>(this.serviceUrl + `/api/book/getWithRelationship?bookCod=${bookCod}&addAuthor=${addAuthor}&addSubject=${addSubject}`);
+  }
 }

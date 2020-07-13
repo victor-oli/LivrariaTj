@@ -21,6 +21,8 @@ export class SimpleCheckboxListComponent {
     if (this.itemList)
       this.filteredItens = this.itemList.filter(h =>
         this.removerAcentos(h.text.toLowerCase().trim()).includes(this.removerAcentos(value.toLowerCase().trim())));
+    else
+      console.warn("configuration is missing");
   }
 
   onSelectItem(itemText: string) {

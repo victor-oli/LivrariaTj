@@ -7,5 +7,7 @@ namespace Tj.Livraria.Domain.Interfaces.Repository
     {
         Author GetByName(string name);
         List<Author> GetAllByBookCod(int bookCod);
+        void AddManyRelations(int bookCod, List<Author> authors);
+        void DeleteManyRelations(int bookCod, List<Author> authors);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Tj.Livraria.Domain.Entities;
 using Tj.Livraria.Domain.Exceptions;
 using Tj.Livraria.Domain.Interfaces.Repository;
@@ -78,7 +79,7 @@ namespace Tj.Livraria.Domain.Services
             entity.Title = entity.Title.ToLower();
             entity.PublishingCompany = entity.PublishingCompany.ToLower();
 
-            var originalAuthor = _repository.Get(entity.BookCod);
+            var originalAuthor = Get(entity.BookCod, true, false);
 
             if (originalAuthor == null)
                 throw new EntityNotFoundException($"Book not found, cod: {entity.BookCod}");
@@ -88,7 +89,31 @@ namespace Tj.Livraria.Domain.Services
             if (anotherBookWithSameTitleAndEdition != null && anotherBookWithSameTitleAndEdition.BookCod != entity.BookCod)
                 throw new AlreadyExistsException("Already exists a book with this title and edition");
 
+            UpdateAuthorRelationship(originalAuthor.BookCod, entity.Authors, originalAuthor.Authors);
+
             return _repository.Update(entity);
+        }
+
+        private void UpdateAuthorRelationship(int bookCod, List<Author> newAuthors, List<Author> oldAuthors)
+        {
+            if (bookCod <= 0)
+                return;
+
+            List<Author> authorsToAdd = newAuthors
+                .Where(n => !oldAuthors
+                    .Any(o => o.AuthorCod == n.AuthorCod))
+                .ToList();
+
+            if (authorsToAdd.Any())
+                _authorRepository.AddManyRelations(bookCod, authorsToAdd);
+
+            List<Author> authorsToRemove = oldAuthors
+                .Where(o => !newAuthors
+                    .Any(n => n.AuthorCod == o.AuthorCod))
+                .ToList();
+
+            if (authorsToRemove.Any())
+                _authorRepository.DeleteManyRelations(bookCod, authorsToRemove);
         }
     }
 }
