@@ -14,6 +14,11 @@ namespace Tj.Livraria.Domain.Services
             _repository = repository;
         }
 
+        public List<AuthorsBySubject> GetAuthorsBySubject()
+        {
+            return _repository.GetAuthorsBySubject();
+        }
+
         public List<BooksBySubject> GetBooksBySubject()
         {
             return _repository.GetBooksBySubject();

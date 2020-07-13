@@ -6,5 +6,6 @@ namespace Tj.Livraria.App.Interfaces
     public interface IReportAppService
     {
         List<BooksBySubject> GetBooksBySubject();
+        List<AuthorsBySubject> GetAuthorsBySubject();
     }
 }

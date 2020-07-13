@@ -6,5 +6,6 @@ namespace Tj.Livraria.Domain.Interfaces.Service
     public interface IReportService
     {
         List<BooksBySubject> GetBooksBySubject();
+        List<AuthorsBySubject> GetAuthorsBySubject();
     }
 }

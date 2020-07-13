@@ -140,7 +140,7 @@ export class UpdateBookComponent {
     this.validateBook();
     this.updateAuthorRelationship();
     this.onChangeCheckedSubject(this.subjectList.filter(s => s.isChecked));
-    console.log(this.book);
+    
     this.service
       .update(this.book)
       .subscribe(

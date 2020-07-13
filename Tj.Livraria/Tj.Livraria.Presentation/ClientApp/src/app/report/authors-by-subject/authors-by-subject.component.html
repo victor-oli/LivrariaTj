@@ -1,0 +1,17 @@
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th colspan="2" class="text-center">Qntd. de Livros por Autor</th>
+    </tr>
+    <tr>
+      <th>Assunto</th>
+      <th class="text-center">Qntd. Autores</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of itens">
+      <td>{{item.subject | titlecase}}</td>
+      <td class="text-center">{{item.authorCount}}</td>
+    </tr>
+  </tbody>
+</table>
