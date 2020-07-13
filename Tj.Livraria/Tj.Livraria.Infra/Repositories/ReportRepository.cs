@@ -13,6 +13,12 @@ namespace Tj.Livraria.Infra.Repositories
 
         public List<BooksBySubject> GetBooksBySubject()
         {
+            string createOrReplaceViewQuery = @"create or alter VIEW livros_por_assunto as
+                                                select a.Descricao Assunto, count(las.Livro_Codl) QntdLivros
+                                                from Assunto a
+                                                left join Livro_Assunto las on las.Assunto_CodAs = a.CodAs
+                                                group by a.Descricao";
+
             string query = @"select 
                                 Assunto Subject,
                                 QntdLivros BookCount 
@@ -21,6 +27,8 @@ namespace Tj.Livraria.Infra.Repositories
 
             using (var conn = new SqlConnection(_connectionString))
             {
+                conn.Execute(createOrReplaceViewQuery);
+
                 return conn.Query<BooksBySubject>(query)
                     .ToList();
             }
